@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Amernots App</string>
+    <string name="example_text">Hello world!</string>
 </resources>

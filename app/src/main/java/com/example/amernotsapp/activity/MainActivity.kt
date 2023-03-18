@@ -8,6 +8,7 @@ import com.example.amernotsapp.R
 import com.example.amernotsapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var controller: NavController
 
     private var _binding: ActivityMainBinding? = null
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         controller = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).navController
     }
