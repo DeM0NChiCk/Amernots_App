@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Amernots App</string>
     <string name="example_text">Hello world!</string>
+    <string name="registration">Регистрация</string>
+    <string name="register">зарегистрироваться</string>
+    <string name="password">Пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="login">Логин</string>
+    <string name="authorization">Авторизация</string>
+    <string name="sign_in">войти</string>
+    <string name="wrong_password">Неправильный пароль</string>
+    <string name="name">Имя</string>
+    <string name="survey_text">Являетесь ли вы сотрудником экстренных служб?</string>
+    <string name="second_checkbox">пожарная служба</string>
+    <string name="third_checkbox">скорая помощь</string>
+    <string name="fourth_checkbox">полиция</string>
 </resources>
