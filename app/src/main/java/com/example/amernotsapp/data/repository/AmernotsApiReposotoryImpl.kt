@@ -13,7 +13,6 @@ class AmernotsApiReposotoryImpl @Inject constructor(
     private val remoteSource: AmernotsApiService,
     private val amernotsApiResponseMapper: AmernotsApiResponseMapper
 ): AmernotsApiRepository {
-
     override suspend fun regNewUserRepository(regRequest: RegRequest): TokenAuthEntity {
         return withContext(Dispatchers.IO) {
             (amernotsApiResponseMapper::mapToken)(remoteSource.addNewUser(regRequest = regRequest))

@@ -3,6 +3,7 @@ package com.example.amernotsapp
 import android.app.Application
 import com.example.amernotsapp.di.AppComponent
 import com.example.amernotsapp.di.DaggerAppComponent
+import com.example.amernotsapp.di.DaggerRegistrationComponent
 import com.example.amernotsapp.di.RegistrationComponent
 
 class AmernotsAppAplication: Application() {
@@ -15,8 +16,8 @@ class AmernotsAppAplication: Application() {
         appComponent = DaggerAppComponent.builder()
             .build()
 
-//        registrationComponent = DaggerRegistrationComponent.builder()
-//            .context(ctx = this)
-//            .build()
+        registrationComponent = DaggerRegistrationComponent.builder()
+            .context(ctx = this)
+            .build()
     }
 }

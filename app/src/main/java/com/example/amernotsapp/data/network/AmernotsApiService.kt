@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface AmernotsApiService {
 
-    @POST("auth/sing_in")
+    @POST("auth/sing_up")
     suspend fun addNewUser(
         @Body regRequest: RegRequest
     ): TokenAuthResponse

@@ -12,7 +12,9 @@ import com.example.amernotsapp.data.model.request.RegRequest
 import com.example.amernotsapp.databinding.FragmentRegBinding
 import com.example.amernotsapp.di.appComponent
 import com.example.amernotsapp.di.lazyViewModel
+import com.example.amernotsapp.ui.model.response.TokenAuthDataModel
 import com.example.amernotsapp.ui.vm.RegFragmentViewModel
+import retrofit2.HttpException
 
 class RegFragment : Fragment(R.layout.fragment_reg) {
 
@@ -36,6 +38,17 @@ class RegFragment : Fragment(R.layout.fragment_reg) {
 
     private fun initViews() {
         binding?.apply {
+            checkboxOne.setOnClickListener {
+                if (checkboxOne.isChecked) {
+                    radioGroup.visibility = View.VISIBLE
+                } else {
+                    radioGroup.visibility = View.GONE
+                    rBtnOne.isChecked = false
+                    rBtnTwo.isChecked = false
+                    rBtnThree.isChecked = false
+                }
+            }
+
             btnRegNewUser.setOnClickListener {
                 val userName = editNewUserName.text.toString()
                 val userLogin = editNewUserLogin.text.toString()
@@ -57,7 +70,7 @@ class RegFragment : Fragment(R.layout.fragment_reg) {
                                 login = userLogin,
                                 password = userPassword,
                                 username = userName,
-                                userStatus = 0 // todo: добавить метод что проверяет статус юзера
+                                userStatus = checkUserStatus() // todo: добавить метод что проверяет статус юзера
                             )
                         )
                         //findNavController().navigate(R.id.action_regFragment_to_authFragment)
@@ -84,31 +97,47 @@ class RegFragment : Fragment(R.layout.fragment_reg) {
     }
 
     private fun observerData() {
-
+        binding?.apply {
+            viewModel.regNewUserDataState.observe(viewLifecycleOwner) {TokenAuthDataModel ->
+                TokenAuthDataModel?.let {data ->
+                    Toast.makeText(
+                        requireContext(),
+                        data.token,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            viewModel.errorState.observe(viewLifecycleOwner) {ex ->
+                ex?.let {
+                    val errorMessage =(ex as? HttpException)?.message() ?: ex.toString()
+                    Toast.makeText(
+                        requireContext(),
+                        errorMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
-    private fun chechUserStatus(): Int{
+    private fun checkUserStatus(): Int {
+        var userStatus = 0
         binding?.apply {
+            if (checkboxOne.isChecked){
+                if (rBtnOne.isChecked){
+                    userStatus = 1
+                } else if (rBtnTwo.isChecked){
+                    userStatus = 2
+                } else if (rBtnThree.isChecked){
+                    userStatus = 3
+                }
+            } else {
+                userStatus = 0
+            }
 
         }
-        return 0
+        return userStatus
     }
-
-
-//        binding?.apply {
-//            }
-//            checkboxOne.setOnClickListener {
-//                if (checkboxOne.isChecked) {
-//                    radioGroup.visibility = View.VISIBLE
-//                } else {
-//                    radioGroup.visibility = View.GONE
-//                    rBtnOne.isChecked = false
-//                    rBtnTwo.isChecked = false
-//                    rBtnThree.isChecked = false
-//                }
-//            }
-//
-//        }
 
     override fun onDestroyView() {
         super.onDestroyView()

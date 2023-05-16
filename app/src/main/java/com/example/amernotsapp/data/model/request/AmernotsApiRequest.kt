@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class RegRequest(
     @SerializedName("login")
-    val login: String?,
+    val login: String? = null,
     @SerializedName("password")
-    val password: String?,
+    val password: String? = null,
     @SerializedName("username")
-    val username: String?,
+    val username: String? = null,
     @SerializedName("userStatus")
-    val userStatus: Int?,
+    val userStatus: Int? = null,
 )
