@@ -1,4 +1,4 @@
-package com.example.amernotsapp.activity
+package com.example.amernotsapp.ui.screen.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
