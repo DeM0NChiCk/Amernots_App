@@ -19,10 +19,5 @@
         android:name="com.example.amernotsapp.ui.screen.fragment.RegFragment"
         android:label="RegFragment"
         tools:layout="@layout/fragment_reg">
-        <action
-            android:id="@+id/action_regFragment_to_authFragment"
-            app:destination="@id/authFragment"
-            app:popUpTo="@id/regFragment"
-            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>
