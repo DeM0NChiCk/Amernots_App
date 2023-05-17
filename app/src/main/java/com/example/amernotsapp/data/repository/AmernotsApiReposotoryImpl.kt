@@ -1,7 +1,8 @@
 package com.example.amernotsapp.data.repository
 
 import com.example.amernotsapp.data.mappers.AmernotsApiResponseMapper
-import com.example.amernotsapp.data.model.request.RegRequest
+import com.example.amernotsapp.data.model.request.SignInRequest
+import com.example.amernotsapp.data.model.request.SignUpRequest
 import com.example.amernotsapp.data.network.AmernotsApiService
 import com.example.amernotsapp.domain.entity.TokenAuthEntity
 import com.example.amernotsapp.domain.repository.AmernotsApiRepository
@@ -13,9 +14,17 @@ class AmernotsApiReposotoryImpl @Inject constructor(
     private val remoteSource: AmernotsApiService,
     private val amernotsApiResponseMapper: AmernotsApiResponseMapper
 ): AmernotsApiRepository {
-    override suspend fun regNewUserRepository(regRequest: RegRequest): TokenAuthEntity {
+    override suspend fun regNewUserRepository(signUpRequest: SignUpRequest): TokenAuthEntity {
         return withContext(Dispatchers.IO) {
-            (amernotsApiResponseMapper::mapToken)(remoteSource.addNewUser(regRequest = regRequest))
+            (amernotsApiResponseMapper::mapToken)(remoteSource.addNewUser(signUpRequest = signUpRequest))
         }
     }
+
+    override suspend fun signInUserRepository(signInRequest: SignInRequest): TokenAuthEntity {
+        return withContext(Dispatchers.IO) {
+            (amernotsApiResponseMapper::mapToken)(remoteSource.checkSignIn(signInRequest = signInRequest))
+        }
+    }
+
+
 }

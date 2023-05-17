@@ -18,5 +18,6 @@ fun Context.appComponent(): AppComponent{
 inline fun <reified T : ViewModel> Fragment.lazyViewModel(
     noinline create: (stateHandle: SavedStateHandle) -> T
 ) = viewModels<T> {
-    RegVMFactory(this,create)
+    SignUpVMFactory(this,create)
+    SignInVMFactory(this,create)
 }

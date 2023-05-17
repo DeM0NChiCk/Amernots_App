@@ -5,33 +5,31 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.amernotsapp.AmernotsAppAplication
 import com.example.amernotsapp.R
-import com.example.amernotsapp.data.model.request.RegRequest
-import com.example.amernotsapp.databinding.FragmentRegBinding
+import com.example.amernotsapp.data.model.request.SignUpRequest
+import com.example.amernotsapp.databinding.FragmentSignUpBinding
 import com.example.amernotsapp.di.appComponent
 import com.example.amernotsapp.di.lazyViewModel
-import com.example.amernotsapp.ui.model.response.TokenAuthDataModel
-import com.example.amernotsapp.ui.vm.RegFragmentViewModel
+import com.example.amernotsapp.ui.vm.SignUpFragmentViewModel
 import retrofit2.HttpException
 
-class RegFragment : Fragment(R.layout.fragment_reg) {
+class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
-    private var binding: FragmentRegBinding? = null
+    private var binding: FragmentSignUpBinding? = null
 
-    private val viewModel: RegFragmentViewModel by lazyViewModel {
-        requireContext().appComponent().regViewModel().create(assistedValue = "AssistedValue")
+    private val viewModel: SignUpFragmentViewModel by lazyViewModel {
+        requireContext().appComponent().signUpNewUserViewModel().create(assistedValue = "AssistedValue")
     }
 
     override fun onAttach(context: Context) {
-        (context.applicationContext as? AmernotsAppAplication)?.appComponent?.inject(fragment = this)
+        (context.applicationContext as? AmernotsAppAplication)?.appComponent?.injectSignUp(fragment = this)
         super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentRegBinding.bind(view)
+        binding = FragmentSignUpBinding.bind(view)
         initViews()
         observerData()
     }
@@ -66,11 +64,11 @@ class RegFragment : Fragment(R.layout.fragment_reg) {
                 if (userLogin.matches(Regex("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))) {
                     if (userPassword == userCheckPassword) {
                         viewModel.requestTokenAuthByRegistration(
-                            RegRequest(
+                            SignUpRequest(
                                 login = userLogin,
                                 password = userPassword,
                                 username = userName,
-                                userStatus = checkUserStatus() // todo: добавить метод что проверяет статус юзера
+                                userStatus = checkUserStatus()
                             )
                         )
                         //findNavController().navigate(R.id.action_regFragment_to_authFragment)
@@ -98,11 +96,11 @@ class RegFragment : Fragment(R.layout.fragment_reg) {
 
     private fun observerData() {
         binding?.apply {
-            viewModel.regNewUserDataState.observe(viewLifecycleOwner) {TokenAuthDataModel ->
+            viewModel.signUpNewUserDataState.observe(viewLifecycleOwner) { TokenAuthDataModel ->
                 TokenAuthDataModel?.let {data ->
                     Toast.makeText(
                         requireContext(),
-                        data.token,
+                        "TokenAuth: " + data.token,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -112,7 +110,7 @@ class RegFragment : Fragment(R.layout.fragment_reg) {
                     val errorMessage =(ex as? HttpException)?.message() ?: ex.toString()
                     Toast.makeText(
                         requireContext(),
-                        errorMessage,
+                        getString(R.string.exception_occurred_pattern, errorMessage),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

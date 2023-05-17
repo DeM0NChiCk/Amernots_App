@@ -7,7 +7,6 @@ import dagger.Module
 
 @Module
 abstract class AppBindsModule {
-
     @Binds
     abstract fun bindAmernotsApiRepositoryImpl_to_AmernotsApiRepository(
         repositoryImpl: AmernotsApiReposotoryImpl
