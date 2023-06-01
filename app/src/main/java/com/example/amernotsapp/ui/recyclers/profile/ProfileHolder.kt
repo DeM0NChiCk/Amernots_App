@@ -1,5 +1,7 @@
 package com.example.amernotsapp.ui.recyclers.profile
 
+import androidx.core.os.bundleOf
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.amernotsapp.R
 import com.example.amernotsapp.databinding.ItemNewslineBinding
@@ -7,6 +9,7 @@ import com.example.amernotsapp.ui.model.response.ProfileDataModel
 
 class ProfileHolder(
     private val binding: ItemNewslineBinding,
+    private val navController: NavController
 ) : RecyclerView.ViewHolder(
     binding.root
 ) {
@@ -54,6 +57,13 @@ class ProfileHolder(
                 }
                 itemProfileTvTimeNews.text = profileDataModel.newslineUser[position].timeRelease
                 itemProfileTvAddressNews.text = profileDataModel.newslineUser[position].address
+            }
+
+            root.setOnClickListener {
+                navController.navigate(
+                    R.id.action_profileFragment_to_additionalInformationNewsFragment,
+                    bundleOf("newsId" to profileDataModel.newslineUser[position].newslineId.toString()),
+                )
             }
         }
 

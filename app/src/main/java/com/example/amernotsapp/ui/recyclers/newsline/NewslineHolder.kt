@@ -1,12 +1,15 @@
 package com.example.amernotsapp.ui.recyclers.newsline
 
+import androidx.core.os.bundleOf
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.amernotsapp.R
 import com.example.amernotsapp.databinding.ItemNewslineBinding
 import com.example.amernotsapp.ui.model.response.NewslineDataModel
 
 class NewslineHolder(
-    private val binding: ItemNewslineBinding
+    private val binding: ItemNewslineBinding,
+    private val navController: NavController
 ): RecyclerView.ViewHolder(
     binding.root
 ) {
@@ -46,6 +49,14 @@ class NewslineHolder(
             }
             itemProfileTvTimeNews.text = newslineDataModel.newsline[position].timeRelease
             itemProfileTvAddressNews.text = newslineDataModel.newsline[position].address
+
+            root.setOnClickListener {
+                navController.navigate(
+                    R.id.action_newslineFragment_to_additionalInformationNewsFragment,
+                    bundleOf("newsId" to newslineDataModel.newsline[position].newslineId.toString()),
+                )
+            }
+
         }
     }
 }

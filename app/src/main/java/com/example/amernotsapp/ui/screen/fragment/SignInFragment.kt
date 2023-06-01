@@ -97,7 +97,6 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
                 }
             }
 
-
             viewModel.errorState.observe(viewLifecycleOwner) { ex ->
                 ex?.let {
                     val errorMessage = (ex as? HttpException)?.message() ?: ex.toString()
@@ -128,6 +127,7 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
             TokenError.TOKEN_NOT_VALIDATE -> {
                 displayErrorToast(R.string.token_not_validate)
             }
+
             TokenError.TOKEN_NOT_FOUND -> {
                 displayErrorToast(R.string.unknown_error)
             }

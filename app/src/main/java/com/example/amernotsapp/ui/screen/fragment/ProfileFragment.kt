@@ -18,6 +18,7 @@ import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.recyclers.profile.ProfileAdapter
 import com.example.amernotsapp.ui.screen.activity.MainActivity
 import com.example.amernotsapp.ui.vm.ProfileFragmentViewModel
+import retrofit2.HttpException
 
 class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
@@ -37,18 +38,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         binding = FragmentProfileBinding.bind(view)
 
         tryAuth()
-
-//        val token_auth = getTokenAuth() ?: run {
-//            onAuthFailed(TokenError.TOKEN_NOT_FOUND)
-//        }
-//
-//        val timestamp = getTimastamp()
-//
-//        if (token_auth != "null") {
-//            if (System.currentTimeMillis() / 1000 - timestamp < TOKEN_UPDATE_INTERVAL) {
-//                onAuthSuccess(token_auth.toString())
-//            } else onAuthFailed(TokenError.TOKEN_NOT_VALIDATE)
-//        } else onAuthFailed(TokenError.TOKEN_NOT_FOUND)
     }
 
     override fun onDestroyView() {
@@ -66,7 +55,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             return@tryAuth
         }
 
-        if (System.currentTimeMillis() / 1000 - timestamp > MainActivity.TOKEN_AUTH_UPDATE_INTERVAL) {
+        if (System.currentTimeMillis() / 1000 - timestamp > TOKEN_AUTH_UPDATE_INTERVAL) {
             onAuthFailed(TokenError.TOKEN_NOT_VALIDATE)
             return
         }
@@ -76,8 +65,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         } else {
             onAuthSuccess(tokenAuth)
         }
-        Log.e("tokenAuth", tokenAuth)
-
     }
 
     private fun initViews(tokenAuth: String) {
@@ -92,7 +79,17 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 ProfileDataModel?.let { data ->
                     tvUsername.text = getString(R.string.username, data.username)
                     tvLoginUser.text = getString(R.string.login_user_in_profile, data.login)
-                    recyclerViewProfileUser.adapter = ProfileAdapter(data)
+                    recyclerViewProfileUser.adapter = ProfileAdapter(data, findNavController())
+                }
+            }
+            viewModel.errorState.observe(viewLifecycleOwner) {ex ->
+                ex?.let {
+                    val errorMessage =(ex as? HttpException)?.message() ?: ex.toString()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.exception_occurred_pattern, errorMessage),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -127,6 +124,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     }
 
     companion object {
-        const val TOKEN_UPDATE_INTERVAL = 60 // в рамках теста значение равно 60с (макс знач 24ч) изменю до 5 часов
+        const val TOKEN_AUTH_UPDATE_INTERVAL = 60 // в рамках теста значение равно 60с (макс знач 24ч) изменю до 5 часов
+
     }
 }

@@ -17,17 +17,20 @@ import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.recyclers.newsline.NewslineAdapter
 import com.example.amernotsapp.ui.screen.activity.MainActivity
 import com.example.amernotsapp.ui.vm.NewslineFragmnetViewModel
+import retrofit2.HttpException
 
-class NewslineFragment: Fragment(R.layout.fragment_newsline) {
+class NewslineFragment : Fragment(R.layout.fragment_newsline) {
 
     private var binding: FragmentNewslineBinding? = null
 
-    private val viewModel:NewslineFragmnetViewModel by lazyViewModel {
+    private val viewModel: NewslineFragmnetViewModel by lazyViewModel {
         requireContext().appComponent().newslineViewModel().create(assistedValue = "AssistedValue")
     }
 
     override fun onAttach(context: Context) {
-        (context.applicationContext as? AmernotsAppAplication)?.appComponent?.injectNewsline(fragment = this)
+        (context.applicationContext as? AmernotsAppAplication)?.appComponent?.injectNewsline(
+            fragment = this
+        )
         super.onAttach(context)
     }
 
@@ -35,15 +38,7 @@ class NewslineFragment: Fragment(R.layout.fragment_newsline) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewslineBinding.bind(view)
 
-        val token_auth = getTokenAuth()
-
-        val timestamp = getTimastamp()
-
-        if (token_auth != "null") {
-            if (System.currentTimeMillis() / 1000 - timestamp < TOKEN_UPDATE_INTERVAL) {
-                onAuthSuccess(token_auth.toString())
-            } else onAuthFailed(TokenError.TOKEN_NOT_VALIDATE)
-        } else onAuthFailed(TokenError.TOKEN_NOT_FOUND)
+        tryAuth()
     }
 
     override fun onDestroyView() {
@@ -51,16 +46,27 @@ class NewslineFragment: Fragment(R.layout.fragment_newsline) {
         binding = null
     }
 
-    private fun getTimastamp(): Long {
+    private fun tryAuth() {
+
         val sharedPreferences = CredentialsPreferences.getCredentialsPreferences(requireContext())
 
-        return sharedPreferences.getLong(CredentialsPreferences.TIMESTAMP_TOKEN_AUTH, 0L)
-    }
+        val timestamp = sharedPreferences.getLong(CredentialsPreferences.TIMESTAMP_TOKEN_AUTH, 0L)
+        val tokenAuth =
+            sharedPreferences.getString(CredentialsPreferences.TOKEN_AUTH, null) ?: run {
+                onAuthFailed(TokenError.TOKEN_NOT_FOUND)
+                return@tryAuth
+            }
 
-    private fun getTokenAuth(): String? {
-        val sharedPreferences = CredentialsPreferences.getCredentialsPreferences(requireContext())
+        if (System.currentTimeMillis() / 1000 - timestamp > MainActivity.TOKEN_AUTH_UPDATE_INTERVAL) {
+            onAuthFailed(TokenError.TOKEN_NOT_VALIDATE)
+            return
+        }
 
-        return sharedPreferences.getString(CredentialsPreferences.TOKEN_AUTH, "null")
+        if (tokenAuth == "null" || tokenAuth == "") {
+            onAuthFailed(TokenError.TOKEN_NOT_FOUND)
+        } else {
+            onAuthSuccess(tokenAuth)
+        }
     }
 
     private fun initViews(tokenAuth: String) {
@@ -73,12 +79,22 @@ class NewslineFragment: Fragment(R.layout.fragment_newsline) {
         binding?.apply {
             viewModel.getNewslineDataState.observe(viewLifecycleOwner) { NewslineDataModel ->
                 NewslineDataModel?.let { data ->
-                    recyclerViewNewsline.adapter = NewslineAdapter(data)
+                    recyclerViewNewsline.adapter = NewslineAdapter(data, findNavController())
                     if (data.userStatus == ROLE_USER) {
                         btnAddNews.visibility = View.VISIBLE
                     } else if (data.userStatus == ROLE_AMBULANCE || data.userStatus == ROLE_POLICE || data.userStatus == ROLE_FIRE_DEPARTMENT) {
                         btnAddNews.visibility = View.GONE
                     }
+                }
+            }
+            viewModel.errorState.observe(viewLifecycleOwner) { ex ->
+                ex?.let {
+                    val errorMessage = (ex as? HttpException)?.message() ?: ex.toString()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.exception_occurred_pattern, errorMessage),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -96,6 +112,7 @@ class NewslineFragment: Fragment(R.layout.fragment_newsline) {
                 findNavController().setGraph(R.navigation.auth_graph)
                 (requireContext() as MainActivity).changeBtnNavVisibility(false)
             }
+
             TokenError.TOKEN_NOT_VALIDATE -> {
                 displayErrorToast(R.string.token_not_validate)
                 findNavController().setGraph(R.navigation.auth_graph)

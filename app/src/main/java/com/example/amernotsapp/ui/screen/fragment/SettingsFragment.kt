@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.amernotsapp.R
 import com.example.amernotsapp.databinding.FragmentSettingsBinding
 
-class SettingsFragment: Fragment(R.layout.fragment_settings) {
+class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private var binding: FragmentSettingsBinding? = null
 

@@ -9,17 +9,29 @@
         android:id="@+id/newslineFragment"
         android:name="com.example.amernotsapp.ui.screen.fragment.NewslineFragment"
         android:label="NewslineFragment"
-        tools:layout="@layout/fragment_newsline"/>
+        tools:layout="@layout/fragment_newsline">
+        <action
+            android:id="@+id/action_newslineFragment_to_additionalInformationNewsFragment"
+            app:destination="@id/additionalInformationNewsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.amernotsapp.ui.screen.fragment.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_additionalInformationNewsFragment"
+            app:destination="@id/additionalInformationNewsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.amernotsapp.ui.screen.fragment.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings"/>
+    <fragment
+        android:id="@+id/additionalInformationNewsFragment"
+        android:name="com.example.amernotsapp.ui.screen.fragment.AdditionalInformationNewsFragment"
+        android:label="AdditionalInformationNewsFragment" />
 
 
 </navigation>

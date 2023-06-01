@@ -24,7 +24,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private var binding: FragmentSignUpBinding? = null
 
     private val viewModel: SignUpFragmentViewModel by lazyViewModel {
-        requireContext().appComponent().signUpNewUserViewModel().create(assistedValue = "AssistedValue")
+        requireContext().appComponent().signUpNewUserViewModel()
+            .create(assistedValue = "AssistedValue")
     }
 
     override fun onAttach(context: Context) {
@@ -106,7 +107,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private fun observerData() {
         binding?.apply {
             viewModel.signUpNewUserDataState.observe(viewLifecycleOwner) { TokenAuthDataModel ->
-                TokenAuthDataModel?.let {data ->
+                TokenAuthDataModel?.let { data ->
                     if (data.token != "null") {
                         onAuthSuccess(System.currentTimeMillis() / 1000, data.token)
                     } else {
@@ -114,9 +115,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     }
                 }
             }
-            viewModel.errorState.observe(viewLifecycleOwner) {ex ->
+            viewModel.errorState.observe(viewLifecycleOwner) { ex ->
                 ex?.let {
-                    val errorMessage =(ex as? HttpException)?.message() ?: ex.toString()
+                    val errorMessage = (ex as? HttpException)?.message() ?: ex.toString()
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.exception_occurred_pattern, errorMessage),
@@ -130,12 +131,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private fun checkUserStatus(): String {
         var userStatus = "ROLE_USER"
         binding?.apply {
-            if (checkboxOne.isChecked){
-                if (rBtnOne.isChecked){
+            if (checkboxOne.isChecked) {
+                if (rBtnOne.isChecked) {
                     userStatus = "ROLE_FIRE_DEPARTMENT"
-                } else if (rBtnTwo.isChecked){
+                } else if (rBtnTwo.isChecked) {
                     userStatus = "ROLE_AMBULANCE"
-                } else if (rBtnThree.isChecked){
+                } else if (rBtnThree.isChecked) {
                     userStatus = "ROLE_POLICE"
                 }
             } else {
@@ -163,6 +164,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             TokenError.TOKEN_NOT_VALIDATE -> {
                 displayErrorToast(R.string.token_not_validate)
             }
+
             TokenError.TOKEN_NOT_FOUND -> {
                 displayErrorToast(R.string.unknown_error)
             }
