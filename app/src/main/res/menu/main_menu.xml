@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <item
+        android:id="@+id/profileFragment"
+        android:enabled="true"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/profile"
+    />
+    <item
+        android:id="@+id/newslineFragment"
+        android:enabled="true"
+        android:icon="@drawable/baseline_newspaper_24"
+        android:title="@string/newsline"
+        />
+    <item
+        android:id="@+id/settingsFragment"
+        android:enabled="true"
+        android:icon="@drawable/baseline_settings_applications_24"
+        android:title="@string/settings"
+        />
 
 </menu>

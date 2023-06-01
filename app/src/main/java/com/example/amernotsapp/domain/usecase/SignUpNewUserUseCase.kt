@@ -1,6 +1,6 @@
 package com.example.amernotsapp.domain.usecase
 
-import com.example.amernotsapp.data.model.request.SignUpRequest
+import com.example.amernotsapp.data.api.model.request.SignUpRequest
 import com.example.amernotsapp.domain.entity.mapTokenAuthEntity
 import com.example.amernotsapp.domain.repository.AmernotsApiRepository
 import com.example.amernotsapp.ui.model.response.TokenAuthDataModel

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.amernotsapp.data.model.request.SignUpRequest
+import com.example.amernotsapp.data.api.model.request.SignUpRequest
 import com.example.amernotsapp.domain.usecase.SignUpNewUserUseCase
 import com.example.amernotsapp.ui.model.response.TokenAuthDataModel
 import dagger.assisted.Assisted

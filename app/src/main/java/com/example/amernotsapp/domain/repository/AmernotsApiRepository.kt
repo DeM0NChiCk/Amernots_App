@@ -1,11 +1,17 @@
 package com.example.amernotsapp.domain.repository
 
-import com.example.amernotsapp.data.model.request.SignInRequest
-import com.example.amernotsapp.data.model.request.SignUpRequest
+import com.example.amernotsapp.data.api.model.request.SignInRequest
+import com.example.amernotsapp.data.api.model.request.SignUpRequest
+import com.example.amernotsapp.domain.entity.NewslineEntity
+import com.example.amernotsapp.domain.entity.ProfileEntity
 import com.example.amernotsapp.domain.entity.TokenAuthEntity
 
 interface AmernotsApiRepository {
     suspend fun regNewUserRepository(signUpRequest: SignUpRequest): TokenAuthEntity
 
     suspend fun signInUserRepository(signInRequest: SignInRequest): TokenAuthEntity
+
+    suspend fun getProfileRepository(tokenAuthHeader: String): ProfileEntity
+
+    suspend fun getNewslineRepository(tokenAuthHeader: String): NewslineEntity
 }
