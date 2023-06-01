@@ -1,4 +1,4 @@
-package com.example.amernotsapp.data.model.request
+package com.example.amernotsapp.data.api.model.request
 
 import com.google.gson.annotations.SerializedName
 
@@ -10,7 +10,7 @@ data class SignUpRequest(
     @SerializedName("username")
     val username: String? = null,
     @SerializedName("userStatus")
-    val userStatus: Int? = null,
+    val userStatus: String? = null,
 )
 
 data class SignInRequest(

@@ -1,7 +1,7 @@
 package com.example.amernotsapp.di
 
 import com.example.amernotsapp.BuildConfig
-import com.example.amernotsapp.data.network.AmernotsApiService
+import com.example.amernotsapp.data.api.network.AmernotsApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -17,10 +17,9 @@ class DataModule {
     fun okHttpClient(): OkHttpClient{
         val client = OkHttpClient.Builder()
             .addInterceptor { chain ->
-                val modifiedUrl = chain.request().url.newBuilder()
-                    .build()
 
-                val request = chain.request().newBuilder().url(modifiedUrl).build()
+                val request = chain.request().newBuilder()
+                    .build()
                 chain.proceed(request)
             }
         if (BuildConfig.DEBUG){
@@ -40,5 +39,4 @@ class DataModule {
 
         return retrofitBuilder.create(AmernotsApiService::class.java)
     }
-
 }

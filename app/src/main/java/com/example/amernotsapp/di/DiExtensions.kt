@@ -20,4 +20,6 @@ inline fun <reified T : ViewModel> Fragment.lazyViewModel(
 ) = viewModels<T> {
     SignUpVMFactory(this,create)
     SignInVMFactory(this,create)
+    ProfileVMFactory(this, create)
+    NewslineVMFactory(this, create)
 }

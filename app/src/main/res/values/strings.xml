@@ -15,4 +15,16 @@
     <string name="third_checkbox">скорая помощь</string>
     <string name="fourth_checkbox">полиция</string>
     <string name="exception_occurred_pattern">Exception occurred: %1$s</string>
+    <string name="profile">Профиль</string>
+    <string name="newsline">Лента новостей</string>
+    <string name="settings">Настройки</string>
+    <string name="change_password">изменить пароль</string>
+    <string name="change_theme">изменить тему</string>
+    <string name="sign_out">выйти из аккаунта</string>
+    <string name="username">Имя: %1$s</string>
+    <string name="login_user_in_profile">Логин: %1$s</string>
+    <string name="unknown_error">вы ввели не верный логин или пароль</string>
+    <string name="db_error">ошибка бд</string>
+    <string name="token_not_validate">Ваш токен больше не актуален, пожалуйста войдите в систему</string>
+
 </resources>
