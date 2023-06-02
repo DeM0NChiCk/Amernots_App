@@ -17,8 +17,6 @@ import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.screen.activity.MainActivity
 import com.example.amernotsapp.ui.vm.AdditInfoNewsFragmentViewModel
 
-
-// TODO: добавить в ответ id пользователя и его роль для того чтобы можно было опредлеить какой сейчас режим и при ответе на вызов изменить в нём id
 class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_information_news) {
 
     private var binding: FragmentAdditionalInformationNewsBinding? = null
@@ -38,13 +36,16 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAdditionalInformationNewsBinding.bind(view)
+        (requireActivity() as? MainActivity)?.changeBtnNavVisibility(false)
 
-        val newsId = arguments?.getString("newsId", null) ?: return
+
+        val newsId = arguments?.getString("newsId", null)?: return
 
         tryAuth(newsId)
     }
 
     override fun onDestroyView() {
+        (requireActivity() as? MainActivity)?.changeBtnNavVisibility(true)
         super.onDestroyView()
         binding = null
     }
@@ -60,7 +61,7 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
                 return@tryAuth
             }
 
-        if (System.currentTimeMillis() / 1000 - timestamp > MainActivity.TOKEN_AUTH_UPDATE_INTERVAL) {
+        if (System.currentTimeMillis() / 1000 - timestamp > TOKEN_AUTH_UPDATE_INTERVAL) {
             onAuthFailed(TokenError.TOKEN_NOT_VALIDATE)
             return
         }
@@ -139,6 +140,17 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
                             tvUrgencyCode.text = getString(R.string.urgency_code, "1")
                         }
                     }
+                    when (data.userStatus) {
+                        ROLE_USER -> {
+                            btnTakeTheChallenge.visibility = View.GONE
+                        }
+                        else -> {
+                            btnTakeTheChallenge.visibility = View.VISIBLE
+                        }
+                    }
+                    if (data.employeeId != -1L) {
+                        btnTakeTheChallenge.visibility = View.GONE
+                    }
                 }
             }
         }
@@ -161,10 +173,10 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
     }
 
     companion object {
-        const val TOKEN_UPDATE_INTERVAL =
-            60 // в рамках теста значение равно 60с (макс знач 24ч) изменю до 5 часов
+        const val TOKEN_AUTH_UPDATE_INTERVAL = 60 // в рамках теста значение равно 60с (макс знач 24ч) изменю до 5 часов
         const val ROLE_FIRE_DEPARTMENT = "ROLE_FIRE_DEPARTMENT"
         const val ROLE_AMBULANCE = "ROLE_AMBULANCE"
         const val ROLE_POLICE = "ROLE_POLICE"
+        const val ROLE_USER = "ROLE_USER"
     }
 }

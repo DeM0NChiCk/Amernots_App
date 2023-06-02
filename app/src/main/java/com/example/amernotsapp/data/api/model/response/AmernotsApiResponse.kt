@@ -51,6 +51,8 @@ data class NewslineResponse(
 )
 
 data class NewsByIdResponse(
+    @SerializedName("userStatus")
+    val userStatus: String? = null,
     @SerializedName("tittleSituation")
     val tittleSituation: String? = null,
     @SerializedName("description")

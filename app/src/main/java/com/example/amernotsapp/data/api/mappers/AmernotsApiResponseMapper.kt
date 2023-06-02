@@ -142,6 +142,7 @@ class AmernotsApiResponseMapper @Inject constructor() {
         return item?.let { response ->
             with(response) {
                 NewsByIdEntity(
+                    userStatus = userStatus ?: "",
                     tittleSituation = tittleSituation ?: "",
                     description = description ?: "",
                     address = address ?: "",
@@ -153,6 +154,7 @@ class AmernotsApiResponseMapper @Inject constructor() {
                 )
             }
         } ?: NewsByIdEntity(
+            userStatus = "",
             tittleSituation = "",
             description = "",
             address = "",

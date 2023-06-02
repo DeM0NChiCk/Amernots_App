@@ -3,9 +3,14 @@ package com.example.amernotsapp.ui.screen.fragment
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.amernotsapp.AmernotsAppAplication
@@ -38,6 +43,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         binding = FragmentProfileBinding.bind(view)
 
         tryAuth()
+        setupMenu()
     }
 
     override fun onDestroyView() {
@@ -121,6 +127,29 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             error,
             Toast.LENGTH_LONG
         ).show()
+    }
+
+    private fun setupMenu() {
+        val menuHost = requireActivity() as MenuHost
+
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.log_out_menu, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.profileFragment -> {
+                            findNavController().setGraph(R.navigation.auth_graph)
+                            (requireActivity() as? MainActivity)?.changeBtnNavVisibility(false)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }, viewLifecycleOwner
+        )
     }
 
     companion object {

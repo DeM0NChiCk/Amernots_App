@@ -84,7 +84,7 @@
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_change_password"
+                android:id="@+id/btn_take_the_challenge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/take_the_challenge"

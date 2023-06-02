@@ -34,5 +34,6 @@
     <string name="urgency_code">код опасности: %1$s</string>
     <string name="take_the_challenge">принять вызов</string>
     <string name="title_situation">Заголовок новости: %1$s</string>
+    <string name="log_out">log_out</string>
 
 </resources>
