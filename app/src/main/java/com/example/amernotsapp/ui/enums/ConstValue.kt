@@ -13,5 +13,6 @@ class ConstValue {
 
         const val STATUS_SUCCESSFULLY = "Successfully"
         const val STATUS_FAILURE = "Failure"
+        const val STATUS_SOMEONE_ANSWERED = "someone already answered the news"
     }
 }

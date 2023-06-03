@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Amernots App</string>
+    <string name="app_name">Emernots</string>
     <string name="example_text">Hello world!</string>
     <string name="registration">Регистрация</string>
     <string name="register">зарегистрироваться</string>
@@ -53,6 +53,7 @@
     <string name="invalid_login">Неверный логин</string>
     <string name="passwords_do_not_match">Пароли не совпадают</string>
     <string name="new_passwords_do_not_match">Новые пароли не совпадают</string>
+    <string name="status_someone_answered">someone already answered the news</string>
 
 
 </resources>

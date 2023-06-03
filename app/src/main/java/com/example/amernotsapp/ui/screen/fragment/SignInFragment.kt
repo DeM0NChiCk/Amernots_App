@@ -88,8 +88,8 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
 
     private fun observerData() {
         binding?.apply {
-            viewModel.signInDataState.observe(viewLifecycleOwner) { TokenAuthDataModel ->
-                TokenAuthDataModel?.let { data ->
+            viewModel.signInDataState.observe(viewLifecycleOwner) { tokenAuthDataModel ->
+                tokenAuthDataModel?.let { data ->
                     if (data.token != "null") {
                         onAuthSuccess(System.currentTimeMillis() / 1000, data.token)
                     } else {

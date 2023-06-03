@@ -7,7 +7,7 @@ import com.example.amernotsapp.data.api.model.request.SignUpRequest
 import com.example.amernotsapp.data.api.network.AmernotsApiService
 import com.example.amernotsapp.domain.entity.NewsByIdEntity
 import com.example.amernotsapp.domain.entity.NewslineEntity
-import com.example.amernotsapp.domain.entity.PassChangeStatusMessageEntity
+import com.example.amernotsapp.domain.entity.ChangeStatusMessageEntity
 import com.example.amernotsapp.domain.entity.ProfileEntity
 import com.example.amernotsapp.domain.entity.TokenAuthEntity
 import com.example.amernotsapp.domain.repository.AmernotsApiRepository
@@ -58,11 +58,23 @@ class AmernotsApiReposotoryImpl @Inject constructor(
     override suspend fun changePassword(
         tokenAuthHeader: String,
         changePasswordRequest: ChangePasswordRequest
-    ): PassChangeStatusMessageEntity {
-        return (amernotsApiResponseMapper::mapPassChangeStatusMessage)(
+    ): ChangeStatusMessageEntity {
+        return (amernotsApiResponseMapper::mapChangeStatusMessage)(
             remoteSource.ChangePassword(
                 tokenAuthHeader = tokenAuthHeader,
                 changePasswordRequest = changePasswordRequest
             ))
+    }
+
+    override suspend fun changeNewsStatus(
+        tokenAuthHeader: String,
+        news_id: String
+    ): ChangeStatusMessageEntity {
+        return (amernotsApiResponseMapper::mapChangeStatusMessage)(
+            remoteSource.ChangeNewsStatus(
+                tokenAuthHeader = tokenAuthHeader,
+                news_id = news_id
+            )
+        )
     }
 }

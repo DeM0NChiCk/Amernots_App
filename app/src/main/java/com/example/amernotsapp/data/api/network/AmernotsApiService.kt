@@ -5,7 +5,7 @@ import com.example.amernotsapp.data.api.model.request.SignInRequest
 import com.example.amernotsapp.data.api.model.request.SignUpRequest
 import com.example.amernotsapp.data.api.model.response.NewsByIdResponse
 import com.example.amernotsapp.data.api.model.response.NewslineResponse
-import com.example.amernotsapp.data.api.model.response.PassChangeStatusMessage
+import com.example.amernotsapp.data.api.model.response.ChangeStatusMessage
 import com.example.amernotsapp.data.api.model.response.ProfileResponse
 import com.example.amernotsapp.data.api.model.response.TokenAuthResponse
 import retrofit2.http.Body
@@ -47,5 +47,11 @@ interface AmernotsApiService {
     suspend fun ChangePassword(
         @Header("Authorization") tokenAuthHeader: String,
         @Body changePasswordRequest: ChangePasswordRequest,
-    ): PassChangeStatusMessage
+    ): ChangeStatusMessage
+
+    @PATCH("change/news_status")
+    suspend fun ChangeNewsStatus(
+        @Header("Authorization") tokenAuthHeader: String,
+        @Query("news_id") news_id: String
+    ): ChangeStatusMessage
 }

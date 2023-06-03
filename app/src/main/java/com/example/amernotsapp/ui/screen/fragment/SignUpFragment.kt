@@ -111,8 +111,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private fun observerData() {
         binding?.apply {
-            viewModel.signUpNewUserDataState.observe(viewLifecycleOwner) { TokenAuthDataModel ->
-                TokenAuthDataModel?.let { data ->
+            viewModel.signUpNewUserDataState.observe(viewLifecycleOwner) { tokenAuthDataModel ->
+                tokenAuthDataModel?.let { data ->
                     if (data.token != "null") {
                         onAuthSuccess(System.currentTimeMillis() / 1000, data.token)
                     } else {

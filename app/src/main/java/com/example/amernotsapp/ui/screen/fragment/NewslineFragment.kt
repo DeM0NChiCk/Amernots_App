@@ -82,8 +82,8 @@ class NewslineFragment : Fragment(R.layout.fragment_newsline) {
 
     private fun observerData() {
         binding?.apply {
-            viewModel.getNewslineDataState.observe(viewLifecycleOwner) { NewslineDataModel ->
-                NewslineDataModel?.let { data ->
+            viewModel.getNewslineDataState.observe(viewLifecycleOwner) { newslineDataModel ->
+                newslineDataModel?.let { data ->
                     recyclerViewNewsline.adapter = NewslineAdapter(data, findNavController())
                     if (data.userStatus == ROLE_USER) {
                         btnAddNews.visibility = View.VISIBLE

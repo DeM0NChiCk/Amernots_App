@@ -1,14 +1,13 @@
 package com.example.amernotsapp.data.api.mappers
 
-import com.example.amernotsapp.data.api.model.request.ChangePasswordRequest
 import com.example.amernotsapp.data.api.model.response.NewsByIdResponse
 import com.example.amernotsapp.data.api.model.response.NewslineResponse
-import com.example.amernotsapp.data.api.model.response.PassChangeStatusMessage
+import com.example.amernotsapp.data.api.model.response.ChangeStatusMessage
 import com.example.amernotsapp.data.api.model.response.ProfileResponse
 import com.example.amernotsapp.data.api.model.response.TokenAuthResponse
 import com.example.amernotsapp.domain.entity.NewsByIdEntity
 import com.example.amernotsapp.domain.entity.NewslineEntity
-import com.example.amernotsapp.domain.entity.PassChangeStatusMessageEntity
+import com.example.amernotsapp.domain.entity.ChangeStatusMessageEntity
 import com.example.amernotsapp.domain.entity.ProfileEntity
 import com.example.amernotsapp.domain.entity.TokenAuthEntity
 import com.example.amernotsapp.ui.model.response.NewsDataModel
@@ -169,14 +168,14 @@ class AmernotsApiResponseMapper @Inject constructor() {
         )
     }
 
-    fun mapPassChangeStatusMessage(item: PassChangeStatusMessage?): PassChangeStatusMessageEntity {
+    fun mapChangeStatusMessage(item: ChangeStatusMessage?): ChangeStatusMessageEntity {
         return item?.let { response ->
             with(response) {
-                PassChangeStatusMessageEntity(
+                ChangeStatusMessageEntity(
                     message = message ?: ""
                 )
             }
-        } ?: PassChangeStatusMessageEntity(
+        } ?: ChangeStatusMessageEntity(
             message = ""
         )
     }

@@ -92,8 +92,8 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
     private fun observerData() {
         binding?.apply {
-            viewModel.getProfileDataState.observe(viewLifecycleOwner) { ProfileDataModel ->
-                ProfileDataModel?.let { data ->
+            viewModel.getProfileDataState.observe(viewLifecycleOwner) { profileDataModel ->
+                profileDataModel?.let { data ->
                     tvUsername.text = getString(R.string.username, data.username)
                     tvLoginUser.text = getString(R.string.login_user_in_profile, data.login)
                     recyclerViewProfileUser.adapter = ProfileAdapter(data, findNavController())

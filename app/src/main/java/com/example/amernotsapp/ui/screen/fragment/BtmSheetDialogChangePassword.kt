@@ -108,10 +108,12 @@ class BtmSheetDialogChangePassword :
                 }
                 if (oldPassword != newPassword) {
                     if (newPassword == checkNewPassword) {
-                        viewModel.changePassword("Bearer $tokenAuth", ChangePasswordRequest(
-                            newPassword = newPassword,
-                            oldPassword = oldPassword
-                        ))
+                        viewModel.changePassword(
+                            "Bearer $tokenAuth", ChangePasswordRequest(
+                                newPassword = newPassword,
+                                oldPassword = oldPassword
+                            )
+                        )
                     } else {
                         Toast.makeText(
                             context,
@@ -138,24 +140,28 @@ class BtmSheetDialogChangePassword :
 
     private fun observerData() {
         binding?.apply {
-            viewModel.mesChangePasswordDataState.observe(viewLifecycleOwner) {passChangeStatusMessageDataModel ->
+            viewModel.mesChangePasswordDataState.observe(viewLifecycleOwner) { passChangeStatusMessageDataModel ->
                 passChangeStatusMessageDataModel?.let { data ->
-                    if (data.message == STATUS_SUCCESSFULLY) {
-                        Toast.makeText(
-                            context,
-                            R.string.status_successfully,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        changeCredentialsPreferences()
-                        (requireActivity() as? MainActivity)?.changeBtnNavVisibility(false)
-                        onDestroyView()
-                        findNavController().setGraph(R.navigation.auth_graph)
-                    } else if (data.message == STATUS_FAILURE){
-                        Toast.makeText(
-                            context,
-                            R.string.status_failure,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    when (data.message) {
+                        STATUS_SUCCESSFULLY -> {
+                            Toast.makeText(
+                                context,
+                                R.string.status_successfully,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            changeCredentialsPreferences()
+                            (requireActivity() as? MainActivity)?.changeBtnNavVisibility(false)
+                            onDestroyView()
+                            findNavController().setGraph(R.navigation.auth_graph)
+                        }
+
+                        STATUS_FAILURE -> {
+                            Toast.makeText(
+                                context,
+                                R.string.status_failure,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }
