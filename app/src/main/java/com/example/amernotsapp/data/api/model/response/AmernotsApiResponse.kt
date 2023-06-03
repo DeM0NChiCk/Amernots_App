@@ -70,3 +70,8 @@ data class NewsByIdResponse(
     @SerializedName("employeeId")
     val employeeId: Long? = null
 )
+
+data class PassChangeStatusMessage(
+    @SerializedName("message")
+    val message: String? = null
+)

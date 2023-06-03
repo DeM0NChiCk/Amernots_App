@@ -113,7 +113,7 @@ class NewslineFragment : Fragment(R.layout.fragment_newsline) {
     private fun onAuthFailed(error: TokenError) {  // вернёт сообщение о не валидности токена и попросит снова авторизоваться
         when (error) {
             TokenError.TOKEN_NOT_FOUND -> {
-                displayErrorToast(R.string.unknown_error)
+                displayErrorToast(R.string.token_not_found)
                 findNavController().setGraph(R.navigation.auth_graph)
                 (requireContext() as MainActivity).changeBtnNavVisibility(false)
             }

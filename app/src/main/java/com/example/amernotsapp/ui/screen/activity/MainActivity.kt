@@ -37,9 +37,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        applicationContext.deleteDatabase("token_auth_cache_db")
-
         _binding = ActivityMainBinding.inflate(layoutInflater)
         with(binding) {
             bottomNavigationFragmentMain.setupWithNavController(

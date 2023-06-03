@@ -21,6 +21,7 @@ import com.example.amernotsapp.ui.enums.TokenError
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.screen.activity.MainActivity
 import com.example.amernotsapp.ui.vm.AdditInfoNewsFragmentViewModel
+import retrofit2.HttpException
 
 class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_information_news) {
 
@@ -78,10 +79,10 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
         }
     }
 
-    private fun onAuthFailed(error: TokenError) {  // вернёт сообщение о не валидности токена и попросит снова авторизоваться
+    private fun onAuthFailed(error: TokenError) {
         when (error) {
             TokenError.TOKEN_NOT_FOUND -> {
-                displayErrorToast(R.string.unknown_error)
+                displayErrorToast(R.string.token_not_found)
                 findNavController().setGraph(R.navigation.auth_graph)
                 (requireContext() as MainActivity).changeBtnNavVisibility(false)
             }
@@ -158,13 +159,24 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
                     }
                 }
             }
+
+            viewModel.errorState.observe(viewLifecycleOwner) { ex ->
+                ex?.let {
+                    val errorMessage = (ex as? HttpException)?.message() ?: ex.toString()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.exception_occurred_pattern, errorMessage),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
     private fun onAuthSuccess(
         tokenAuth: String,
         newsId: String,
-    ) { // добавит в запрос header и добавит значения во вьюхи
+    ) {
         initViews(tokenAuth, newsId)
         observerData()
     }

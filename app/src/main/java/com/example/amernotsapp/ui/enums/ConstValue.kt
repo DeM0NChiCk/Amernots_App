@@ -10,5 +10,8 @@ class ConstValue {
         const val TOKEN_AUTH_UPDATE_INTERVAL = 60
 
         const val VALIDATE_LOGIN = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
+
+        const val STATUS_SUCCESSFULLY = "Successfully"
+        const val STATUS_FAILURE = "Failure"
     }
 }

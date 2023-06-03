@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -76,6 +77,15 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
     private fun initViews(tokenAuth: String) {
         binding?.apply {
+            tvChangePassword.setOnClickListener {
+                val btmSheetDialogFragement = BtmSheetDialogChangePassword()
+
+                btmSheetDialogFragement.show(
+                    (context as AppCompatActivity).supportFragmentManager,
+                    btmSheetDialogFragement::class.java.simpleName
+                )
+            }
+
             viewModel.requestGetProfile("Bearer $tokenAuth")
         }
     }
@@ -110,15 +120,15 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         }
     }
 
-    private fun onAuthSuccess(tokenAuth: String) { // добавит в запрос header и добавит значения во вьюхи
+    private fun onAuthSuccess(tokenAuth: String) {
         initViews(tokenAuth)
         observerData()
     }
 
-    private fun onAuthFailed(error: TokenError) {  // вернёт сообщение о не валидности токена и попросит снова авторизоваться
+    private fun onAuthFailed(error: TokenError) {
         when (error) {
             TokenError.TOKEN_NOT_FOUND -> {
-                displayErrorToast(R.string.unknown_error)
+                displayErrorToast(R.string.token_not_found)
                 findNavController().setGraph(R.navigation.auth_graph)
                 (requireContext() as MainActivity).changeBtnNavVisibility(false)
             }
@@ -150,6 +160,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     return when (menuItem.itemId) {
                         R.id.profileFragment -> {
+                            changeCredentialsPreferences()
                             findNavController().setGraph(R.navigation.auth_graph)
                             (requireActivity() as? MainActivity)?.changeBtnNavVisibility(false)
                             true
@@ -159,5 +170,13 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 }
             }, viewLifecycleOwner
         )
+    }
+
+    private fun changeCredentialsPreferences() {
+        with(CredentialsPreferences.getCredentialsPreferences(requireContext()).edit()) {
+            putLong(CredentialsPreferences.TIMESTAMP_TOKEN_AUTH, 0L)
+            putString(CredentialsPreferences.TOKEN_AUTH, "")
+            apply()
+        }
     }
 }

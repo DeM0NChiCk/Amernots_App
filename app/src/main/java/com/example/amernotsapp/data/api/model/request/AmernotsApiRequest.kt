@@ -19,3 +19,10 @@ data class SignInRequest(
     @SerializedName("password")
     val password: String? = null,
 )
+
+data class ChangePasswordRequest(
+    @SerializedName("oldPassword")
+    val oldPassword: String? = null,
+    @SerializedName("newPassword")
+    val newPassword: String? = null
+)

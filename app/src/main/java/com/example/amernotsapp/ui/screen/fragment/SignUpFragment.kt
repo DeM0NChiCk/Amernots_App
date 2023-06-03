@@ -71,7 +71,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 if (userLogin.isEmpty() || userPassword.isEmpty()) {
                     Toast.makeText(
                         context,
-                        "Fields cannot be empty!",
+                        R.string.fields_empty,
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -99,7 +99,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 } else {
                     Toast.makeText(
                         context,
-                        "Invalid login",
+                        R.string.invalid_login,
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -171,7 +171,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             }
 
             TokenError.TOKEN_NOT_FOUND -> {
-                displayErrorToast(R.string.unknown_error)
+                displayErrorToast(R.string.login_or_pas_error)
             }
         }
     }

@@ -1,11 +1,13 @@
 package com.example.amernotsapp.di
 
 import com.example.amernotsapp.ui.screen.fragment.AdditionalInformationNewsFragment
+import com.example.amernotsapp.ui.screen.fragment.BtmSheetDialogChangePassword
 import com.example.amernotsapp.ui.screen.fragment.NewslineFragment
 import com.example.amernotsapp.ui.screen.fragment.ProfileFragment
 import com.example.amernotsapp.ui.screen.fragment.SignInFragment
 import com.example.amernotsapp.ui.screen.fragment.SignUpFragment
 import com.example.amernotsapp.ui.vm.AdditInfoNewsFragmentViewModel
+import com.example.amernotsapp.ui.vm.BtmSheetDialogViewModel
 import com.example.amernotsapp.ui.vm.NewslineFragmnetViewModel
 import com.example.amernotsapp.ui.vm.ProfileFragmentViewModel
 import com.example.amernotsapp.ui.vm.SignInFragmentViewModel
@@ -31,4 +33,7 @@ interface AppComponent {
 
     fun additInfoNewsViewModel(): AdditInfoNewsFragmentViewModel.Factory
     fun injectAdditionalInfoNews(fragment: AdditionalInformationNewsFragment)
+
+    fun injectBtmShtDialogChangePassword(fragment: BtmSheetDialogChangePassword)
+    fun btmShtDialogChangePasswordViewModel(): BtmSheetDialogViewModel.Factory
 }
