@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newsline"
-        android:textSize="26sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +42,7 @@
         android:id="@+id/btn_add_news"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_add_24"
+        android:src="@drawable/ic_add_new"
         android:visibility="gone"
         android:tooltipText="add news"
         app:layout_constraintBottom_toBottomOf="parent"

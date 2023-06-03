@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.NavigationRes
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.example.amernotsapp.R
 import com.example.amernotsapp.databinding.ActivityMainBinding
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.TOKEN_AUTH_UPDATE_INTERVAL
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 
 
@@ -19,6 +22,15 @@ class MainActivity : AppCompatActivity() {
     private val fragment by lazy {
         supportFragmentManager
             .findFragmentById(R.id.container) as NavHostFragment
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val sharedPreferences = PreferenceManager
+            .getDefaultSharedPreferences(applicationContext)
+        val theme = sharedPreferences.getString("theme", "") ?: return
+        setTheme(theme)
     }
 
 
@@ -68,6 +80,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val TOKEN_AUTH_UPDATE_INTERVAL = 60
+        fun setTheme(theme: String) {
+            when (theme) {
+                "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                else -> AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                )
+            }
+        }
     }
 }

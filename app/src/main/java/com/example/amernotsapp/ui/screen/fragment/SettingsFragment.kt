@@ -1,23 +1,19 @@
 package com.example.amernotsapp.ui.screen.fragment
 
 import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.preference.ListPreference
+import androidx.preference.PreferenceFragmentCompat
 import com.example.amernotsapp.R
-import com.example.amernotsapp.databinding.FragmentSettingsBinding
+import com.example.amernotsapp.ui.screen.activity.MainActivity
 
-class SettingsFragment : Fragment(R.layout.fragment_settings) {
+class SettingsFragment : PreferenceFragmentCompat() {
 
-    private var binding: FragmentSettingsBinding? = null
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.settings, rootKey)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSettingsBinding.bind(view)
+        findPreference<ListPreference>("theme")?.setOnPreferenceChangeListener{ _, newsValue ->
+            if (newsValue is String) MainActivity.setTheme(newsValue)
+            true
+        }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
-
 }

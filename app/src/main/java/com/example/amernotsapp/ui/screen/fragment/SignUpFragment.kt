@@ -13,6 +13,11 @@ import com.example.amernotsapp.data.api.model.request.SignUpRequest
 import com.example.amernotsapp.databinding.FragmentSignUpBinding
 import com.example.amernotsapp.di.appComponent
 import com.example.amernotsapp.di.lazyViewModel
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_AMBULANCE
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_FIRE_DEPARTMENT
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_POLICE
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_USER
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.VALIDATE_LOGIN
 import com.example.amernotsapp.ui.enums.TokenError
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.screen.activity.MainActivity
@@ -129,18 +134,18 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun checkUserStatus(): String {
-        var userStatus = "ROLE_USER"
+        var userStatus = ROLE_USER
         binding?.apply {
             if (checkboxOne.isChecked) {
                 if (rBtnOne.isChecked) {
-                    userStatus = "ROLE_FIRE_DEPARTMENT"
+                    userStatus = ROLE_FIRE_DEPARTMENT
                 } else if (rBtnTwo.isChecked) {
-                    userStatus = "ROLE_AMBULANCE"
+                    userStatus = ROLE_AMBULANCE
                 } else if (rBtnThree.isChecked) {
-                    userStatus = "ROLE_POLICE"
+                    userStatus = ROLE_POLICE
                 }
             } else {
-                userStatus = "ROLE_USER"
+                userStatus = ROLE_USER
             }
 
         }
@@ -177,9 +182,5 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             error,
             Toast.LENGTH_LONG
         ).show()
-    }
-
-    companion object {
-        private const val VALIDATE_LOGIN = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
     }
 }

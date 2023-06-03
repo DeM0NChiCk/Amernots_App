@@ -12,6 +12,11 @@ import com.example.amernotsapp.R
 import com.example.amernotsapp.databinding.FragmentNewslineBinding
 import com.example.amernotsapp.di.appComponent
 import com.example.amernotsapp.di.lazyViewModel
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_AMBULANCE
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_FIRE_DEPARTMENT
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_POLICE
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_USER
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.TOKEN_AUTH_UPDATE_INTERVAL
 import com.example.amernotsapp.ui.enums.TokenError
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.recyclers.newsline.NewslineAdapter
@@ -57,7 +62,7 @@ class NewslineFragment : Fragment(R.layout.fragment_newsline) {
                 return@tryAuth
             }
 
-        if (System.currentTimeMillis() / 1000 - timestamp > MainActivity.TOKEN_AUTH_UPDATE_INTERVAL) {
+        if (System.currentTimeMillis() / 1000 - timestamp > TOKEN_AUTH_UPDATE_INTERVAL) {
             onAuthFailed(TokenError.TOKEN_NOT_VALIDATE)
             return
         }
@@ -129,11 +134,5 @@ class NewslineFragment : Fragment(R.layout.fragment_newsline) {
         ).show()
     }
 
-    companion object {
-        const val TOKEN_UPDATE_INTERVAL = 60 // в рамках теста значение равно 60с (макс знач 24ч) изменю до 5 часов
-        const val ROLE_USER = "ROLE_USER"
-        const val ROLE_FIRE_DEPARTMENT = "ROLE_FIRE_DEPARTMENT"
-        const val ROLE_AMBULANCE = "ROLE_AMBULANCE"
-        const val ROLE_POLICE = "ROLE_POLICE"
-    }
+
 }

@@ -24,7 +24,6 @@
     <string name="username">Имя: %1$s</string>
     <string name="login_user_in_profile">Логин: %1$s</string>
     <string name="unknown_error">вы ввели не верный логин или пароль</string>
-    <string name="db_error">ошибка бд</string>
     <string name="token_not_validate">Ваш токен больше не актуален, пожалуйста войдите в систему</string>
     <string name="additional_information">Дополнительная информация</string>
     <string name="description">Описание новости: %1$s</string>
@@ -34,6 +33,15 @@
     <string name="urgency_code">код опасности: %1$s</string>
     <string name="take_the_challenge">принять вызов</string>
     <string name="title_situation">Заголовок новости: %1$s</string>
-    <string name="log_out">log_out</string>
+    <string name="log_out">выйти из аккаунта</string>
+    <string name="theme">Тема</string>
+    <string name="system_default">Системная</string>
+    <string name="light">Светлая</string>
+    <string name="dark">Тёмная</string>
+    <string name="select_theme">Выберите тему</string>
+    <string name="theme_summary">Выберите тему приложения</string>
+    <string name="general_settings">Общие настройки</string>
+    <string name="created">Созданные</string>
+    <string name="accepted">Принятые</string>
 
 </resources>

@@ -12,6 +12,11 @@ import com.example.amernotsapp.R
 import com.example.amernotsapp.databinding.FragmentAdditionalInformationNewsBinding
 import com.example.amernotsapp.di.appComponent
 import com.example.amernotsapp.di.lazyViewModel
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_AMBULANCE
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_FIRE_DEPARTMENT
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_POLICE
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_USER
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.TOKEN_AUTH_UPDATE_INTERVAL
 import com.example.amernotsapp.ui.enums.TokenError
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.screen.activity.MainActivity
@@ -170,13 +175,5 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
             error,
             Toast.LENGTH_LONG
         ).show()
-    }
-
-    companion object {
-        const val TOKEN_AUTH_UPDATE_INTERVAL = 60 // в рамках теста значение равно 60с (макс знач 24ч) изменю до 5 часов
-        const val ROLE_FIRE_DEPARTMENT = "ROLE_FIRE_DEPARTMENT"
-        const val ROLE_AMBULANCE = "ROLE_AMBULANCE"
-        const val ROLE_POLICE = "ROLE_POLICE"
-        const val ROLE_USER = "ROLE_USER"
     }
 }

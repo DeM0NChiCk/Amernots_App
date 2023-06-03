@@ -13,6 +13,7 @@ import com.example.amernotsapp.data.api.model.request.SignInRequest
 import com.example.amernotsapp.databinding.FragmentSignInBinding
 import com.example.amernotsapp.di.appComponent
 import com.example.amernotsapp.di.lazyViewModel
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.VALIDATE_LOGIN
 import com.example.amernotsapp.ui.enums.TokenError
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.screen.activity.MainActivity
@@ -140,9 +141,5 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
             error,
             Toast.LENGTH_LONG
         ).show()
-    }
-
-    companion object {
-        private const val VALIDATE_LOGIN = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
     }
 }

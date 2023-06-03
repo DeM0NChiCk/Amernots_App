@@ -13,6 +13,7 @@
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,7 +30,7 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/baseline_circle_red_24" />
+                tools:src="@drawable/ic_circle_red_code_5" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
@@ -49,6 +50,7 @@
                     style="@style/TextAppearance.Material3.TitleLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     tools:text="Title news" />
 
                 <LinearLayout
@@ -63,6 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
+                        android:textColor="@color/black"
                         tools:text="ВРЕМЯ 00:23" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -70,6 +73,7 @@
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         tools:text="Статус" />
 
                 </LinearLayout>
@@ -79,6 +83,7 @@
                     style="@style/TextAppearance.Material3.BodyMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     tools:text="Addres" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
