@@ -18,13 +18,41 @@
     <string name="profile">Профиль</string>
     <string name="newsline">Лента новостей</string>
     <string name="settings">Настройки</string>
-    <string name="change_password">изменить пароль</string>
-    <string name="change_theme">изменить тему</string>
-    <string name="sign_out">выйти из аккаунта</string>
+    <string name="change_password">Изменить пароль</string>
     <string name="username">Имя: %1$s</string>
     <string name="login_user_in_profile">Логин: %1$s</string>
-    <string name="unknown_error">вы ввели не верный логин или пароль</string>
-    <string name="db_error">ошибка бд</string>
+    <string name="login_or_pas_error">вы ввели не верный логин или пароль</string>
     <string name="token_not_validate">Ваш токен больше не актуален, пожалуйста войдите в систему</string>
+    <string name="additional_information">Дополнительная информация</string>
+    <string name="description">Описание новости: %1$s</string>
+    <string name="address">адресс: %1$s</string>
+    <string name="time_release">время публикации: %1$s</string>
+    <string name="role_news">требуется сотрудник: %1$s</string>
+    <string name="urgency_code">код опасности: %1$s</string>
+    <string name="take_the_challenge">принять вызов</string>
+    <string name="title_situation">Заголовок новости: %1$s</string>
+    <string name="log_out">выйти из аккаунта</string>
+    <string name="theme">Тема</string>
+    <string name="system_default">Системная</string>
+    <string name="light">Светлая</string>
+    <string name="dark">Тёмная</string>
+    <string name="select_theme">Выберите тему</string>
+    <string name="theme_summary">Выберите тему приложения</string>
+    <string name="general_settings">Общие настройки</string>
+    <string name="created">Созданные</string>
+    <string name="accepted">Принятые</string>
+    <string name="old_password">Старый пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="check_new_password">Повторите новый пароль</string>
+    <string name="change_password_btn">изменить пароль</string>
+    <string name="token_not_found">токен не найден</string>
+    <string name="status_successfully">Ваш пароль изменён, войдите в систему снова</string>
+    <string name="status_failure">Старый пароль не верен</string>
+    <string name="fields_empty">Fields cannot be empty!</string>
+    <string name="check_old_and_new_pass">Старый и новый пароль не могут совпадать!</string>
+    <string name="invalid_login">Неверный логин</string>
+    <string name="passwords_do_not_match">Пароли не совпадают</string>
+    <string name="new_passwords_do_not_match">Новые пароли не совпадают</string>
+
 
 </resources>

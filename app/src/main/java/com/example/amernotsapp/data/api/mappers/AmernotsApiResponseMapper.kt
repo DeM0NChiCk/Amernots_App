@@ -1,9 +1,14 @@
 package com.example.amernotsapp.data.api.mappers
 
+import com.example.amernotsapp.data.api.model.request.ChangePasswordRequest
+import com.example.amernotsapp.data.api.model.response.NewsByIdResponse
 import com.example.amernotsapp.data.api.model.response.NewslineResponse
+import com.example.amernotsapp.data.api.model.response.PassChangeStatusMessage
 import com.example.amernotsapp.data.api.model.response.ProfileResponse
 import com.example.amernotsapp.data.api.model.response.TokenAuthResponse
+import com.example.amernotsapp.domain.entity.NewsByIdEntity
 import com.example.amernotsapp.domain.entity.NewslineEntity
+import com.example.amernotsapp.domain.entity.PassChangeStatusMessageEntity
 import com.example.amernotsapp.domain.entity.ProfileEntity
 import com.example.amernotsapp.domain.entity.TokenAuthEntity
 import com.example.amernotsapp.ui.model.response.NewsDataModel
@@ -16,7 +21,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
             with(response) {
                 TokenAuthEntity(
                     token = token ?: ""
-
                 )
             }
         } ?: TokenAuthEntity(
@@ -134,6 +138,46 @@ class AmernotsApiResponseMapper @Inject constructor() {
                     employeeId = 0L
                 )
             )
+        )
+    }
+
+    fun mapNewsById(item: NewsByIdResponse?): NewsByIdEntity {
+        return item?.let { response ->
+            with(response) {
+                NewsByIdEntity(
+                    userStatus = userStatus ?: "",
+                    tittleSituation = tittleSituation ?: "",
+                    description = description ?: "",
+                    address = address ?: "",
+                    timeRelease = timeRelease ?: "",
+                    urgencyCode = urgencyCode ?: 0,
+                    photo = photo ?: "",
+                    roleNews = roleNews ?: "",
+                    employeeId = employeeId ?: 0L,
+                )
+            }
+        } ?: NewsByIdEntity(
+            userStatus = "",
+            tittleSituation = "",
+            description = "",
+            address = "",
+            timeRelease = "",
+            urgencyCode = 0,
+            photo = "",
+            roleNews = "",
+            employeeId = 0L
+        )
+    }
+
+    fun mapPassChangeStatusMessage(item: PassChangeStatusMessage?): PassChangeStatusMessageEntity {
+        return item?.let { response ->
+            with(response) {
+                PassChangeStatusMessageEntity(
+                    message = message ?: ""
+                )
+            }
+        } ?: PassChangeStatusMessageEntity(
+            message = ""
         )
     }
 

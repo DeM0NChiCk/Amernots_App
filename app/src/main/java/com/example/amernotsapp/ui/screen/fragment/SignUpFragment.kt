@@ -13,6 +13,11 @@ import com.example.amernotsapp.data.api.model.request.SignUpRequest
 import com.example.amernotsapp.databinding.FragmentSignUpBinding
 import com.example.amernotsapp.di.appComponent
 import com.example.amernotsapp.di.lazyViewModel
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_AMBULANCE
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_FIRE_DEPARTMENT
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_POLICE
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_USER
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.VALIDATE_LOGIN
 import com.example.amernotsapp.ui.enums.TokenError
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.screen.activity.MainActivity
@@ -24,7 +29,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private var binding: FragmentSignUpBinding? = null
 
     private val viewModel: SignUpFragmentViewModel by lazyViewModel {
-        requireContext().appComponent().signUpNewUserViewModel().create(assistedValue = "AssistedValue")
+        requireContext().appComponent().signUpNewUserViewModel()
+            .create(assistedValue = "AssistedValue")
     }
 
     override fun onAttach(context: Context) {
@@ -65,7 +71,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 if (userLogin.isEmpty() || userPassword.isEmpty()) {
                     Toast.makeText(
                         context,
-                        "Fields cannot be empty!",
+                        R.string.fields_empty,
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -93,7 +99,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 } else {
                     Toast.makeText(
                         context,
-                        "Invalid login",
+                        R.string.invalid_login,
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -106,7 +112,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private fun observerData() {
         binding?.apply {
             viewModel.signUpNewUserDataState.observe(viewLifecycleOwner) { TokenAuthDataModel ->
-                TokenAuthDataModel?.let {data ->
+                TokenAuthDataModel?.let { data ->
                     if (data.token != "null") {
                         onAuthSuccess(System.currentTimeMillis() / 1000, data.token)
                     } else {
@@ -114,9 +120,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     }
                 }
             }
-            viewModel.errorState.observe(viewLifecycleOwner) {ex ->
+            viewModel.errorState.observe(viewLifecycleOwner) { ex ->
                 ex?.let {
-                    val errorMessage =(ex as? HttpException)?.message() ?: ex.toString()
+                    val errorMessage = (ex as? HttpException)?.message() ?: ex.toString()
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.exception_occurred_pattern, errorMessage),
@@ -128,18 +134,18 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun checkUserStatus(): String {
-        var userStatus = "ROLE_USER"
+        var userStatus = ROLE_USER
         binding?.apply {
-            if (checkboxOne.isChecked){
-                if (rBtnOne.isChecked){
-                    userStatus = "ROLE_FIRE_DEPARTMENT"
-                } else if (rBtnTwo.isChecked){
-                    userStatus = "ROLE_AMBULANCE"
-                } else if (rBtnThree.isChecked){
-                    userStatus = "ROLE_POLICE"
+            if (checkboxOne.isChecked) {
+                if (rBtnOne.isChecked) {
+                    userStatus = ROLE_FIRE_DEPARTMENT
+                } else if (rBtnTwo.isChecked) {
+                    userStatus = ROLE_AMBULANCE
+                } else if (rBtnThree.isChecked) {
+                    userStatus = ROLE_POLICE
                 }
             } else {
-                userStatus = "ROLE_USER"
+                userStatus = ROLE_USER
             }
 
         }
@@ -163,8 +169,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             TokenError.TOKEN_NOT_VALIDATE -> {
                 displayErrorToast(R.string.token_not_validate)
             }
+
             TokenError.TOKEN_NOT_FOUND -> {
-                displayErrorToast(R.string.unknown_error)
+                displayErrorToast(R.string.login_or_pas_error)
             }
         }
     }
@@ -175,9 +182,5 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             error,
             Toast.LENGTH_LONG
         ).show()
-    }
-
-    companion object {
-        private const val VALIDATE_LOGIN = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
     }
 }

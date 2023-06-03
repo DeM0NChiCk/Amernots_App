@@ -48,5 +48,30 @@ data class NewslineResponse(
     val newsline: List<News> ?= null,
     @SerializedName("userStatus")
     val userStatus: String? = null
+)
 
+data class NewsByIdResponse(
+    @SerializedName("userStatus")
+    val userStatus: String? = null,
+    @SerializedName("tittleSituation")
+    val tittleSituation: String? = null,
+    @SerializedName("description")
+    val description: String? = null,
+    @SerializedName("address")
+    val address: String? = null,
+    @SerializedName("timeRelease")
+    val timeRelease: String? = null,
+    @SerializedName("urgencyCode")
+    val urgencyCode: Int? = null,
+    @SerializedName("photo")
+    val photo: String? = null,
+    @SerializedName("roleNews")
+    val roleNews: String? = null,
+    @SerializedName("employeeId")
+    val employeeId: Long? = null
+)
+
+data class PassChangeStatusMessage(
+    @SerializedName("message")
+    val message: String? = null
 )

@@ -1,10 +1,13 @@
 package com.example.amernotsapp.data.api.repository
 
 import com.example.amernotsapp.data.api.mappers.AmernotsApiResponseMapper
+import com.example.amernotsapp.data.api.model.request.ChangePasswordRequest
 import com.example.amernotsapp.data.api.model.request.SignInRequest
 import com.example.amernotsapp.data.api.model.request.SignUpRequest
 import com.example.amernotsapp.data.api.network.AmernotsApiService
+import com.example.amernotsapp.domain.entity.NewsByIdEntity
 import com.example.amernotsapp.domain.entity.NewslineEntity
+import com.example.amernotsapp.domain.entity.PassChangeStatusMessageEntity
 import com.example.amernotsapp.domain.entity.ProfileEntity
 import com.example.amernotsapp.domain.entity.TokenAuthEntity
 import com.example.amernotsapp.domain.repository.AmernotsApiRepository
@@ -15,7 +18,7 @@ import javax.inject.Inject
 class AmernotsApiReposotoryImpl @Inject constructor(
     private val remoteSource: AmernotsApiService,
     private val amernotsApiResponseMapper: AmernotsApiResponseMapper,
-): AmernotsApiRepository {
+) : AmernotsApiRepository {
     override suspend fun regNewUserRepository(signUpRequest: SignUpRequest): TokenAuthEntity {
         return withContext(Dispatchers.IO) {
             (amernotsApiResponseMapper::mapToken)(remoteSource.addNewUser(signUpRequest = signUpRequest))
@@ -38,5 +41,28 @@ class AmernotsApiReposotoryImpl @Inject constructor(
         return withContext(Dispatchers.IO) {
             (amernotsApiResponseMapper::mapNewsline)(remoteSource.getNewsline(tokenAuthHeader = tokenAuthHeader))
         }
+    }
+
+    override suspend fun getNewsByIdRepository(
+        tokenAuthHeader: String,
+        newsId: String,
+    ): NewsByIdEntity {
+        return (amernotsApiResponseMapper::mapNewsById)(
+            remoteSource.getNewsById(
+                tokenAuthHeader = tokenAuthHeader,
+                news_id = newsId
+            )
+        )
+    }
+
+    override suspend fun changePassword(
+        tokenAuthHeader: String,
+        changePasswordRequest: ChangePasswordRequest
+    ): PassChangeStatusMessageEntity {
+        return (amernotsApiResponseMapper::mapPassChangeStatusMessage)(
+            remoteSource.ChangePassword(
+                tokenAuthHeader = tokenAuthHeader,
+                changePasswordRequest = changePasswordRequest
+            ))
     }
 }

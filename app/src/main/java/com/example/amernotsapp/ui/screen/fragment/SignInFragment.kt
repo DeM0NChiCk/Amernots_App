@@ -13,6 +13,7 @@ import com.example.amernotsapp.data.api.model.request.SignInRequest
 import com.example.amernotsapp.databinding.FragmentSignInBinding
 import com.example.amernotsapp.di.appComponent
 import com.example.amernotsapp.di.lazyViewModel
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.VALIDATE_LOGIN
 import com.example.amernotsapp.ui.enums.TokenError
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.screen.activity.MainActivity
@@ -59,7 +60,7 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
                 if (userLogin.isEmpty() || userPassword.isEmpty()) {
                     Toast.makeText(
                         context,
-                        "Fields cannot be empty!",
+                        R.string.fields_empty,
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -75,7 +76,7 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
                 } else {
                     Toast.makeText(
                         context,
-                        "Invalid login",
+                        R.string.invalid_login,
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -96,7 +97,6 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
                     }
                 }
             }
-
 
             viewModel.errorState.observe(viewLifecycleOwner) { ex ->
                 ex?.let {
@@ -128,8 +128,9 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
             TokenError.TOKEN_NOT_VALIDATE -> {
                 displayErrorToast(R.string.token_not_validate)
             }
+
             TokenError.TOKEN_NOT_FOUND -> {
-                displayErrorToast(R.string.unknown_error)
+                displayErrorToast(R.string.login_or_pas_error)
             }
         }
     }
@@ -140,9 +141,5 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
             error,
             Toast.LENGTH_LONG
         ).show()
-    }
-
-    companion object {
-        private const val VALIDATE_LOGIN = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
     }
 }

@@ -2,10 +2,15 @@ package com.example.amernotsapp.ui.screen.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.amernotsapp.AmernotsAppAplication
@@ -13,11 +18,14 @@ import com.example.amernotsapp.R
 import com.example.amernotsapp.databinding.FragmentProfileBinding
 import com.example.amernotsapp.di.appComponent
 import com.example.amernotsapp.di.lazyViewModel
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_USER
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.TOKEN_AUTH_UPDATE_INTERVAL
 import com.example.amernotsapp.ui.enums.TokenError
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
 import com.example.amernotsapp.ui.recyclers.profile.ProfileAdapter
 import com.example.amernotsapp.ui.screen.activity.MainActivity
 import com.example.amernotsapp.ui.vm.ProfileFragmentViewModel
+import retrofit2.HttpException
 
 class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
@@ -37,18 +45,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         binding = FragmentProfileBinding.bind(view)
 
         tryAuth()
-
-//        val token_auth = getTokenAuth() ?: run {
-//            onAuthFailed(TokenError.TOKEN_NOT_FOUND)
-//        }
-//
-//        val timestamp = getTimastamp()
-//
-//        if (token_auth != "null") {
-//            if (System.currentTimeMillis() / 1000 - timestamp < TOKEN_UPDATE_INTERVAL) {
-//                onAuthSuccess(token_auth.toString())
-//            } else onAuthFailed(TokenError.TOKEN_NOT_VALIDATE)
-//        } else onAuthFailed(TokenError.TOKEN_NOT_FOUND)
+        setupMenu()
     }
 
     override fun onDestroyView() {
@@ -66,7 +63,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             return@tryAuth
         }
 
-        if (System.currentTimeMillis() / 1000 - timestamp > MainActivity.TOKEN_AUTH_UPDATE_INTERVAL) {
+        if (System.currentTimeMillis() / 1000 - timestamp > TOKEN_AUTH_UPDATE_INTERVAL) {
             onAuthFailed(TokenError.TOKEN_NOT_VALIDATE)
             return
         }
@@ -76,12 +73,19 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         } else {
             onAuthSuccess(tokenAuth)
         }
-        Log.e("tokenAuth", tokenAuth)
-
     }
 
     private fun initViews(tokenAuth: String) {
         binding?.apply {
+            tvChangePassword.setOnClickListener {
+                val btmSheetDialogFragement = BtmSheetDialogChangePassword()
+
+                btmSheetDialogFragement.show(
+                    (context as AppCompatActivity).supportFragmentManager,
+                    btmSheetDialogFragement::class.java.simpleName
+                )
+            }
+
             viewModel.requestGetProfile("Bearer $tokenAuth")
         }
     }
@@ -92,21 +96,39 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 ProfileDataModel?.let { data ->
                     tvUsername.text = getString(R.string.username, data.username)
                     tvLoginUser.text = getString(R.string.login_user_in_profile, data.login)
-                    recyclerViewProfileUser.adapter = ProfileAdapter(data)
+                    recyclerViewProfileUser.adapter = ProfileAdapter(data, findNavController())
+
+                    when (data.userStatus) {
+                        ROLE_USER -> {
+                            tvTitleRecyclerView.text = getString(R.string.created)
+                        } else -> {
+                            tvTitleRecyclerView.text = getString(R.string.accepted)
+                        }
+                    }
+                }
+            }
+            viewModel.errorState.observe(viewLifecycleOwner) {ex ->
+                ex?.let {
+                    val errorMessage =(ex as? HttpException)?.message() ?: ex.toString()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.exception_occurred_pattern, errorMessage),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
     }
 
-    private fun onAuthSuccess(tokenAuth: String) { // добавит в запрос header и добавит значения во вьюхи
+    private fun onAuthSuccess(tokenAuth: String) {
         initViews(tokenAuth)
         observerData()
     }
 
-    private fun onAuthFailed(error: TokenError) {  // вернёт сообщение о не валидности токена и попросит снова авторизоваться
+    private fun onAuthFailed(error: TokenError) {
         when (error) {
             TokenError.TOKEN_NOT_FOUND -> {
-                displayErrorToast(R.string.unknown_error)
+                displayErrorToast(R.string.token_not_found)
                 findNavController().setGraph(R.navigation.auth_graph)
                 (requireContext() as MainActivity).changeBtnNavVisibility(false)
             }
@@ -126,7 +148,35 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         ).show()
     }
 
-    companion object {
-        const val TOKEN_UPDATE_INTERVAL = 60 // в рамках теста значение равно 60с (макс знач 24ч) изменю до 5 часов
+    private fun setupMenu() {
+        val menuHost = requireActivity() as MenuHost
+
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.log_out_menu, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.profileFragment -> {
+                            changeCredentialsPreferences()
+                            findNavController().setGraph(R.navigation.auth_graph)
+                            (requireActivity() as? MainActivity)?.changeBtnNavVisibility(false)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }, viewLifecycleOwner
+        )
+    }
+
+    private fun changeCredentialsPreferences() {
+        with(CredentialsPreferences.getCredentialsPreferences(requireContext()).edit()) {
+            putLong(CredentialsPreferences.TIMESTAMP_TOKEN_AUTH, 0L)
+            putString(CredentialsPreferences.TOKEN_AUTH, "")
+            apply()
+        }
     }
 }
