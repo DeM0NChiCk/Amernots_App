@@ -3,7 +3,7 @@
 Полное название Emergency notification system. 
 
 mvvm, Kotlin Coroutines - https://github.com/DeM0NChiCk/Amernots_App/tree/master/app/src/main/java/com/example/amernotsapp/ui/vm \
-Dagger 2 - https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/di/AppComponent.kt, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/AmernotsAppAplication.kt, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/di/AppBindsModule.kt \
+Dagger 2 - https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/di/AppComponent.kt, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/AmernotsAppAplication.kt, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/di/AppBindsModule.kt, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/di/DiExtensions.kt \
 SharedPreferences - https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/ui/preferences/CredentialsPreferences.kt \
 REST (Retrofit, OkHttp, Gson) - https://github.com/DeM0NChiCk/Amernots_App/tree/master/app/src/main/java/com/example/amernotsapp/data/api, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/di/DataModule.kt \
 Clean Architecture - https://github.com/DeM0NChiCk/Amernots_App/tree/master/app/src/main/java/com/example/amernotsapp \
