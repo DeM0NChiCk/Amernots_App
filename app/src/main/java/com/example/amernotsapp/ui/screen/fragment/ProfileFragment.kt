@@ -92,8 +92,8 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
     private fun observerData() {
         binding?.apply {
-            viewModel.getProfileDataState.observe(viewLifecycleOwner) { ProfileDataModel ->
-                ProfileDataModel?.let { data ->
+            viewModel.getProfileDataState.observe(viewLifecycleOwner) { profileDataModel ->
+                profileDataModel?.let { data ->
                     tvUsername.text = getString(R.string.username, data.username)
                     tvLoginUser.text = getString(R.string.login_user_in_profile, data.login)
                     recyclerViewProfileUser.adapter = ProfileAdapter(data, findNavController())
@@ -128,7 +128,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private fun onAuthFailed(error: TokenError) {
         when (error) {
             TokenError.TOKEN_NOT_FOUND -> {
-                displayErrorToast(R.string.token_not_found)
+                displayErrorToast(R.string.login_or_pas_error)
                 findNavController().setGraph(R.navigation.auth_graph)
                 (requireContext() as MainActivity).changeBtnNavVisibility(false)
             }

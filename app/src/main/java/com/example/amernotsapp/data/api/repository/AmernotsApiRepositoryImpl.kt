@@ -1,13 +1,14 @@
 package com.example.amernotsapp.data.api.repository
 
 import com.example.amernotsapp.data.api.mappers.AmernotsApiResponseMapper
+import com.example.amernotsapp.data.api.model.request.AddNewsRequest
 import com.example.amernotsapp.data.api.model.request.ChangePasswordRequest
 import com.example.amernotsapp.data.api.model.request.SignInRequest
 import com.example.amernotsapp.data.api.model.request.SignUpRequest
 import com.example.amernotsapp.data.api.network.AmernotsApiService
 import com.example.amernotsapp.domain.entity.NewsByIdEntity
 import com.example.amernotsapp.domain.entity.NewslineEntity
-import com.example.amernotsapp.domain.entity.PassChangeStatusMessageEntity
+import com.example.amernotsapp.domain.entity.ChangeStatusMessageEntity
 import com.example.amernotsapp.domain.entity.ProfileEntity
 import com.example.amernotsapp.domain.entity.TokenAuthEntity
 import com.example.amernotsapp.domain.repository.AmernotsApiRepository
@@ -15,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class AmernotsApiReposotoryImpl @Inject constructor(
+class AmernotsApiRepositoryImpl @Inject constructor(
     private val remoteSource: AmernotsApiService,
     private val amernotsApiResponseMapper: AmernotsApiResponseMapper,
 ) : AmernotsApiRepository {
@@ -58,11 +59,35 @@ class AmernotsApiReposotoryImpl @Inject constructor(
     override suspend fun changePassword(
         tokenAuthHeader: String,
         changePasswordRequest: ChangePasswordRequest
-    ): PassChangeStatusMessageEntity {
-        return (amernotsApiResponseMapper::mapPassChangeStatusMessage)(
+    ): ChangeStatusMessageEntity {
+        return (amernotsApiResponseMapper::mapChangeStatusMessage)(
             remoteSource.ChangePassword(
                 tokenAuthHeader = tokenAuthHeader,
                 changePasswordRequest = changePasswordRequest
             ))
+    }
+
+    override suspend fun changeNewsStatus(
+        tokenAuthHeader: String,
+        news_id: String
+    ): ChangeStatusMessageEntity {
+        return (amernotsApiResponseMapper::mapChangeStatusMessage)(
+            remoteSource.ChangeNewsStatus(
+                tokenAuthHeader = tokenAuthHeader,
+                news_id = news_id
+            )
+        )
+    }
+
+    override suspend fun addNews(
+        tokenAuthHeader: String,
+        addNewsRequest: AddNewsRequest
+    ): ChangeStatusMessageEntity {
+        return (amernotsApiResponseMapper::mapChangeStatusMessage)(
+            remoteSource.AddNews(
+                tokenAuthHeader = tokenAuthHeader,
+                addNewsRequest = addNewsRequest
+            )
+        )
     }
 }

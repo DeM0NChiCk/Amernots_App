@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Amernots App</string>
+    <string name="app_name">Emernots</string>
     <string name="example_text">Hello world!</string>
     <string name="registration">Регистрация</string>
     <string name="register">зарегистрироваться</string>
@@ -11,9 +11,9 @@
     <string name="wrong_password">Неправильный пароль</string>
     <string name="name">Имя</string>
     <string name="survey_text">Являетесь ли вы сотрудником экстренных служб?</string>
-    <string name="second_checkbox">пожарная служба</string>
-    <string name="third_checkbox">скорая помощь</string>
-    <string name="fourth_checkbox">полиция</string>
+    <string name="r_btn_fire_department">пожарная служба</string>
+    <string name="r_btn_ambulance">скорая помощь</string>
+    <string name="r_btn_police">полиция</string>
     <string name="exception_occurred_pattern">Exception occurred: %1$s</string>
     <string name="profile">Профиль</string>
     <string name="newsline">Лента новостей</string>
@@ -46,13 +46,27 @@
     <string name="check_new_password">Повторите новый пароль</string>
     <string name="change_password_btn">изменить пароль</string>
     <string name="token_not_found">токен не найден</string>
-    <string name="status_successfully">Ваш пароль изменён, войдите в систему снова</string>
+    <string name="status_successfully_pass">Ваш пароль изменён, войдите в систему снова</string>
     <string name="status_failure">Старый пароль не верен</string>
-    <string name="fields_empty">Fields cannot be empty!</string>
+    <string name="fields_empty">Поля не могут быть пустыми!</string>
     <string name="check_old_and_new_pass">Старый и новый пароль не могут совпадать!</string>
     <string name="invalid_login">Неверный логин</string>
     <string name="passwords_do_not_match">Пароли не совпадают</string>
     <string name="new_passwords_do_not_match">Новые пароли не совпадают</string>
-
+    <string name="status_someone_answered">someone already answered the news</string>
+    <string name="create_news">Создать новость</string>
+    <string name="title_situation_edit">Заголовок ситуации</string>
+    <string name="description_edit">Описание</string>
+    <string name="address_edit">Адресс</string>
+    <string name="what_service_need">Помощь какой службы требуется:</string>
+    <string name="number_one">1</string>
+    <string name="number_two">2</string>
+    <string name="number_three">3</string>
+    <string name="number_four">4</string>
+    <string name="number_five">5</string>
+    <string name="level_of_danger">Как вы оцените уровень опасности:</string>
+    <string name="check_r_btn">Вы не до конца заполнили форму!</string>
+    <string name="status_successfully_create">Ваша новость создана</string>
+    <string name="status_successfully_take">Вы приняли вызов</string>
 
 </resources>

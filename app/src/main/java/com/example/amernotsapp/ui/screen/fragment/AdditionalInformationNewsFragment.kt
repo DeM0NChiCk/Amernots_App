@@ -16,6 +16,9 @@ import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_AMBULANCE
 import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_FIRE_DEPARTMENT
 import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_POLICE
 import com.example.amernotsapp.ui.enums.ConstValue.Companion.ROLE_USER
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.STATUS_FAILURE
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.STATUS_SOMEONE_ANSWERED
+import com.example.amernotsapp.ui.enums.ConstValue.Companion.STATUS_SUCCESSFULLY
 import com.example.amernotsapp.ui.enums.ConstValue.Companion.TOKEN_AUTH_UPDATE_INTERVAL
 import com.example.amernotsapp.ui.enums.TokenError
 import com.example.amernotsapp.ui.preferences.CredentialsPreferences
@@ -98,6 +101,10 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
 
     private fun initViews(tokenAuth: String, newsId: String) {
         binding?.apply {
+            btnTakeTheChallenge.setOnClickListener {
+                viewModel.requestChangeNewsStatus("Bearer $tokenAuth", newsId)
+            }
+
             viewModel.requestGetNewsById("Bearer $tokenAuth", newsId)
         }
     }
@@ -156,6 +163,36 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
                     }
                     if (data.employeeId != -1L) {
                         btnTakeTheChallenge.visibility = View.GONE
+                    }
+                }
+            }
+
+            viewModel.changeNewsStatusDataState.observe(viewLifecycleOwner) { changeStatusMessageDataModel ->
+                changeStatusMessageDataModel?.let { data ->
+                    when (data.message) {
+                        STATUS_SUCCESSFULLY -> {
+                            btnTakeTheChallenge.visibility = View.GONE
+                            Toast.makeText(
+                                context,
+                                R.string.status_successfully_take,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        STATUS_FAILURE -> {
+                            Toast.makeText(
+                                context,
+                                R.string.status_failure,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        STATUS_SOMEONE_ANSWERED -> {
+                            btnTakeTheChallenge.visibility = View.GONE
+                            Toast.makeText(
+                                context,
+                                R.string.status_someone_answered,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }

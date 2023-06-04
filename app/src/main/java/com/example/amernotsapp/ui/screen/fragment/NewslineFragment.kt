@@ -76,14 +76,18 @@ class NewslineFragment : Fragment(R.layout.fragment_newsline) {
 
     private fun initViews(tokenAuth: String) {
         binding?.apply {
+            btnAddNews.setOnClickListener{
+                findNavController().navigate(R.id.action_newslineFragment_to_addNewsFragment)
+            }
+
             viewModel.requestGetNewsline("Bearer $tokenAuth")
         }
     }
 
     private fun observerData() {
         binding?.apply {
-            viewModel.getNewslineDataState.observe(viewLifecycleOwner) { NewslineDataModel ->
-                NewslineDataModel?.let { data ->
+            viewModel.getNewslineDataState.observe(viewLifecycleOwner) { newslineDataModel ->
+                newslineDataModel?.let { data ->
                     recyclerViewNewsline.adapter = NewslineAdapter(data, findNavController())
                     if (data.userStatus == ROLE_USER) {
                         btnAddNews.visibility = View.VISIBLE

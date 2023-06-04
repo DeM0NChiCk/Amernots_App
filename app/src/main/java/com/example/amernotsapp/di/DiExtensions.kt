@@ -24,4 +24,5 @@ inline fun <reified T : ViewModel> Fragment.lazyViewModel(
     NewslineVMFactory(this, create)
     AdditInfoNewsVMFactory(this, create)
     BtmShtDialogVMFactory(this, create)
+    AddNewsVMFactory(this, create)
 }

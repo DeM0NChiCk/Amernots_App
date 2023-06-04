@@ -9,7 +9,6 @@ data class NewsByIdEntity(
     val address: String,
     val timeRelease: String,
     val urgencyCode: Int,
-    val photo: String,
     val roleNews: String,
     val employeeId: Long
 )
@@ -22,7 +21,6 @@ fun NewsByIdEntity.mapNewsByIdEntity(): NewsByIdDataModel {
         address = this.address,
         timeRelease = this.timeRelease,
         urgencyCode = this.urgencyCode,
-        photo = this.photo,
         roleNews = this.roleNews,
         employeeId = this.employeeId
     )

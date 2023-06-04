@@ -18,6 +18,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "AMERNOTS_API_URL", '"http://192.168.1.123:8080/amernots_api/"')
+        buildConfigField("String", "DA_DATA_URL", '"https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/"')
+        buildConfigField("String", "API_KEY_DA_DATA", '"Token b206c6258cf492b1f39d84870ce180c0c507cfa0"')
     }
 
     buildTypes {

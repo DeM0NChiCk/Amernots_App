@@ -1,14 +1,13 @@
 package com.example.amernotsapp.data.api.mappers
 
-import com.example.amernotsapp.data.api.model.request.ChangePasswordRequest
 import com.example.amernotsapp.data.api.model.response.NewsByIdResponse
 import com.example.amernotsapp.data.api.model.response.NewslineResponse
-import com.example.amernotsapp.data.api.model.response.PassChangeStatusMessage
+import com.example.amernotsapp.data.api.model.response.ChangeStatusMessage
 import com.example.amernotsapp.data.api.model.response.ProfileResponse
 import com.example.amernotsapp.data.api.model.response.TokenAuthResponse
 import com.example.amernotsapp.domain.entity.NewsByIdEntity
 import com.example.amernotsapp.domain.entity.NewslineEntity
-import com.example.amernotsapp.domain.entity.PassChangeStatusMessageEntity
+import com.example.amernotsapp.domain.entity.ChangeStatusMessageEntity
 import com.example.amernotsapp.domain.entity.ProfileEntity
 import com.example.amernotsapp.domain.entity.TokenAuthEntity
 import com.example.amernotsapp.ui.model.response.NewsDataModel
@@ -44,7 +43,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                             address = news.address,
                             timeRelease = news.timeRelease,
                             urgencyCode = news.urgencyCode,
-                            photo = news.photo,
                             roleNews = news.roleNews,
                             authorId = news.authorId,
                             employeeId = news.employeeId
@@ -57,7 +55,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                             address = "",
                             timeRelease = "",
                             urgencyCode = 0,
-                            photo = "",
                             roleNews = "",
                             authorId = 0L,
                             employeeId = 0L
@@ -78,7 +75,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                     address = "",
                     timeRelease = "",
                     urgencyCode = 0,
-                    photo = "",
                     roleNews = "",
                     authorId = 0L,
                     employeeId = 0L
@@ -100,7 +96,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                             address = news.address,
                             timeRelease = news.timeRelease,
                             urgencyCode = news.urgencyCode,
-                            photo = news.photo,
                             roleNews = news.roleNews,
                             authorId = news.authorId,
                             employeeId = news.employeeId
@@ -113,7 +108,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                             address = "",
                             timeRelease = "",
                             urgencyCode = 0,
-                            photo = "",
                             roleNews = "",
                             authorId = 0L,
                             employeeId = 0L
@@ -132,7 +126,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                     address = "",
                     timeRelease = "",
                     urgencyCode = 0,
-                    photo = "",
                     roleNews = "",
                     authorId = 0L,
                     employeeId = 0L
@@ -151,7 +144,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                     address = address ?: "",
                     timeRelease = timeRelease ?: "",
                     urgencyCode = urgencyCode ?: 0,
-                    photo = photo ?: "",
                     roleNews = roleNews ?: "",
                     employeeId = employeeId ?: 0L,
                 )
@@ -163,20 +155,19 @@ class AmernotsApiResponseMapper @Inject constructor() {
             address = "",
             timeRelease = "",
             urgencyCode = 0,
-            photo = "",
             roleNews = "",
             employeeId = 0L
         )
     }
 
-    fun mapPassChangeStatusMessage(item: PassChangeStatusMessage?): PassChangeStatusMessageEntity {
+    fun mapChangeStatusMessage(item: ChangeStatusMessage?): ChangeStatusMessageEntity {
         return item?.let { response ->
             with(response) {
-                PassChangeStatusMessageEntity(
+                ChangeStatusMessageEntity(
                     message = message ?: ""
                 )
             }
-        } ?: PassChangeStatusMessageEntity(
+        } ?: ChangeStatusMessageEntity(
             message = ""
         )
     }

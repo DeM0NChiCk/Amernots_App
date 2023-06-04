@@ -26,3 +26,18 @@ data class ChangePasswordRequest(
     @SerializedName("newPassword")
     val newPassword: String? = null
 )
+
+data class AddNewsRequest(
+    @SerializedName("tittleSituation")
+    val tittleSituation: String,
+    @SerializedName("description")
+    val description: String,
+    @SerializedName("address")
+    val address: String,
+    @SerializedName("timeRelease")
+    val timeRelease: String,
+    @SerializedName("urgencyCode")
+    val urgencyCode: Int,
+    @SerializedName("roleNews")
+    val roleNews: String,
+)

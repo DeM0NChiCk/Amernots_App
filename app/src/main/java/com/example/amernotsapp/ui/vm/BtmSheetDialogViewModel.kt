@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.amernotsapp.data.api.model.request.ChangePasswordRequest
 import com.example.amernotsapp.domain.usecase.ChangePasswordUseCase
-import com.example.amernotsapp.ui.model.response.PassChangeStatusMessageDataModel
+import com.example.amernotsapp.ui.model.response.ChangeStatusMessageDataModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -18,8 +18,8 @@ class BtmSheetDialogViewModel @AssistedInject constructor(
     private val changePasswordUseCase: ChangePasswordUseCase
 ): ViewModel() {
 
-    private val _mesChangePasswordDataState: MutableLiveData<PassChangeStatusMessageDataModel?> = MutableLiveData(null)
-    val mesChangePasswordDataState: LiveData<PassChangeStatusMessageDataModel?> = _mesChangePasswordDataState
+    private val _mesChangePasswordDataState: MutableLiveData<ChangeStatusMessageDataModel?> = MutableLiveData(null)
+    val mesChangePasswordDataState: LiveData<ChangeStatusMessageDataModel?> = _mesChangePasswordDataState
 
     private val _errorState: MutableLiveData<Throwable> = MutableLiveData(null)
     val errorState: LiveData<Throwable> = _errorState

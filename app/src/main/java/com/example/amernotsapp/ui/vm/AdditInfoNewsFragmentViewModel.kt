@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.amernotsapp.domain.usecase.ChangeNewsStatusUseCase
 import com.example.amernotsapp.domain.usecase.GetNewsByIdUseCase
+import com.example.amernotsapp.ui.model.response.ChangeStatusMessageDataModel
 import com.example.amernotsapp.ui.model.response.NewsByIdDataModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -14,11 +16,15 @@ import kotlinx.coroutines.launch
 
 class AdditInfoNewsFragmentViewModel @AssistedInject constructor(
     @Assisted(ASSISTED_VALUE_KEY) private val assistedValue: String,
-    private val getNewsByIdUseCase: GetNewsByIdUseCase
+    private val getNewsByIdUseCase: GetNewsByIdUseCase,
+    private val changeNewsStatusUseCase: ChangeNewsStatusUseCase
 ): ViewModel() {
 
     private val _getNewsByIdDataState: MutableLiveData<NewsByIdDataModel?> = MutableLiveData(null)
     val getNewsByIdDataState: LiveData<NewsByIdDataModel?> = _getNewsByIdDataState
+
+    private val _changeNewsStatusDataState: MutableLiveData<ChangeStatusMessageDataModel?> = MutableLiveData(null)
+    val changeNewsStatusDataState: LiveData<ChangeStatusMessageDataModel?> = _changeNewsStatusDataState
 
     private val _errorState: MutableLiveData<Throwable> = MutableLiveData(null)
     val errorState: LiveData<Throwable> = _errorState
@@ -33,6 +39,18 @@ class AdditInfoNewsFragmentViewModel @AssistedInject constructor(
                 getNewsByIdUseCase(tokenAuthHeader, newsId)
             }.onSuccess { getNewsByIdDataState ->
                 _getNewsByIdDataState.postValue(getNewsByIdDataState)
+            }.onFailure { ex ->
+                _errorState.value = ex
+            }
+        }
+    }
+
+    fun requestChangeNewsStatus(tokenAuthHeader: String, newsId: String) {
+        viewModelScope.launch {
+            runCatching {
+                changeNewsStatusUseCase(tokenAuthHeader, newsId)
+            }.onSuccess { changeNewsStatusDataState ->
+                _changeNewsStatusDataState.postValue(changeNewsStatusDataState)
             }.onFailure { ex ->
                 _errorState.value = ex
             }

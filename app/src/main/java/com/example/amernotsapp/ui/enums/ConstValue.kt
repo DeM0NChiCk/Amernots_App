@@ -7,11 +7,12 @@ class ConstValue {
         const val ROLE_AMBULANCE = "ROLE_AMBULANCE"
         const val ROLE_POLICE = "ROLE_POLICE"
 
-        const val TOKEN_AUTH_UPDATE_INTERVAL = 60
+        const val TOKEN_AUTH_UPDATE_INTERVAL = 60 * 60
 
         const val VALIDATE_LOGIN = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
 
         const val STATUS_SUCCESSFULLY = "Successfully"
         const val STATUS_FAILURE = "Failure"
+        const val STATUS_SOMEONE_ANSWERED = "someone already answered the news"
     }
 }
