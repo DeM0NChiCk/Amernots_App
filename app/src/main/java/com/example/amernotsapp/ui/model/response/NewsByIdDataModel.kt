@@ -7,7 +7,6 @@ data class NewsByIdDataModel(
     val address: String,
     val timeRelease: String,
     val urgencyCode: Int,
-    val photo: String,
     val roleNews: String,
     val employeeId: Long,
 )

@@ -128,7 +128,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private fun onAuthFailed(error: TokenError) {
         when (error) {
             TokenError.TOKEN_NOT_FOUND -> {
-                displayErrorToast(R.string.token_not_found)
+                displayErrorToast(R.string.login_or_pas_error)
                 findNavController().setGraph(R.navigation.auth_graph)
                 (requireContext() as MainActivity).changeBtnNavVisibility(false)
             }

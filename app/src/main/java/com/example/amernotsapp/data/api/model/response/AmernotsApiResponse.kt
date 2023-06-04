@@ -33,8 +33,6 @@ data class News(
     val timeRelease: String,
     @SerializedName("urgencyCode")
     val urgencyCode: Int,
-    @SerializedName("photo")
-    val photo: String,
     @SerializedName("roleNews")
     val roleNews: String,
     @SerializedName("authorId")
@@ -63,8 +61,6 @@ data class NewsByIdResponse(
     val timeRelease: String? = null,
     @SerializedName("urgencyCode")
     val urgencyCode: Int? = null,
-    @SerializedName("photo")
-    val photo: String? = null,
     @SerializedName("roleNews")
     val roleNews: String? = null,
     @SerializedName("employeeId")

@@ -174,7 +174,7 @@ class AdditionalInformationNewsFragment : Fragment(R.layout.fragment_additional_
                             btnTakeTheChallenge.visibility = View.GONE
                             Toast.makeText(
                                 context,
-                                R.string.status_successfully,
+                                R.string.status_successfully_take,
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_newslineFragment_to_additionalInformationNewsFragment"
             app:destination="@id/additionalInformationNewsFragment" />
+        <action
+            android:id="@+id/action_newslineFragment_to_addNewsFragment"
+            app:destination="@id/addNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -31,7 +34,19 @@
     <fragment
         android:id="@+id/additionalInformationNewsFragment"
         android:name="com.example.amernotsapp.ui.screen.fragment.AdditionalInformationNewsFragment"
-        android:label="AdditionalInformationNewsFragment" />
+        android:label="AdditionalInformationNewsFragment"
+        tools:layout="@layout/fragment_additional_information_news"/>
+    <fragment
+        android:id="@+id/addNewsFragment"
+        android:name="com.example.amernotsapp.ui.screen.fragment.AddNewsFragment"
+        android:label="AddNewsFragment"
+        tools:layout="@layout/fragment_form_create_news">
+        <action
+            android:id="@+id/action_addNewsFragment_to_newslineFragment"
+            app:destination="@id/newslineFragment"
+            app:popUpTo="@id/newslineFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 
 </navigation>

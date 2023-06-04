@@ -1,6 +1,7 @@
 package com.example.amernotsapp.data.api.repository
 
 import com.example.amernotsapp.data.api.mappers.AmernotsApiResponseMapper
+import com.example.amernotsapp.data.api.model.request.AddNewsRequest
 import com.example.amernotsapp.data.api.model.request.ChangePasswordRequest
 import com.example.amernotsapp.data.api.model.request.SignInRequest
 import com.example.amernotsapp.data.api.model.request.SignUpRequest
@@ -15,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class AmernotsApiReposotoryImpl @Inject constructor(
+class AmernotsApiRepositoryImpl @Inject constructor(
     private val remoteSource: AmernotsApiService,
     private val amernotsApiResponseMapper: AmernotsApiResponseMapper,
 ) : AmernotsApiRepository {
@@ -74,6 +75,18 @@ class AmernotsApiReposotoryImpl @Inject constructor(
             remoteSource.ChangeNewsStatus(
                 tokenAuthHeader = tokenAuthHeader,
                 news_id = news_id
+            )
+        )
+    }
+
+    override suspend fun addNews(
+        tokenAuthHeader: String,
+        addNewsRequest: AddNewsRequest
+    ): ChangeStatusMessageEntity {
+        return (amernotsApiResponseMapper::mapChangeStatusMessage)(
+            remoteSource.AddNews(
+                tokenAuthHeader = tokenAuthHeader,
+                addNewsRequest = addNewsRequest
             )
         )
     }

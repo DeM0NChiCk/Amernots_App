@@ -1,5 +1,6 @@
 package com.example.amernotsapp.domain.repository
 
+import com.example.amernotsapp.data.api.model.request.AddNewsRequest
 import com.example.amernotsapp.data.api.model.request.ChangePasswordRequest
 import com.example.amernotsapp.data.api.model.request.SignInRequest
 import com.example.amernotsapp.data.api.model.request.SignUpRequest
@@ -23,4 +24,6 @@ interface AmernotsApiRepository {
     suspend fun changePassword(tokenAuthHeader: String, changePasswordRequest: ChangePasswordRequest): ChangeStatusMessageEntity
 
     suspend fun changeNewsStatus(tokenAuthHeader: String, news_id: String): ChangeStatusMessageEntity
+
+    suspend fun addNews(tokenAuthHeader: String, addNewsRequest: AddNewsRequest): ChangeStatusMessageEntity
 }

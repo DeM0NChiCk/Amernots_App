@@ -24,18 +24,13 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.container) as NavHostFragment
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         val sharedPreferences = PreferenceManager
             .getDefaultSharedPreferences(applicationContext)
         val theme = sharedPreferences.getString("theme", "") ?: return
         setTheme(theme)
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
         with(binding) {

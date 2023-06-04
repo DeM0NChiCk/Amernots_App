@@ -15,7 +15,6 @@ data class NewsDataModel(
     val address: String,
     val timeRelease: String,
     val urgencyCode: Int,
-    val photo: String,
     val roleNews: String,
     val authorId: Long,
     val employeeId: Long

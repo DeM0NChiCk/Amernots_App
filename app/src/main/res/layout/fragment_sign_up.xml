@@ -99,7 +99,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/checkbox_one"
+                android:id="@+id/checkbox_user_survey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -112,7 +112,7 @@
                 android:textSize="18sp" />
 
             <RadioGroup
-                android:id="@+id/radio_group"
+                android:id="@+id/radio_group_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -121,26 +121,26 @@
                 android:visibility="gone">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/r_btn_one"
+                    android:id="@+id/r_btn_fire_department"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/second_checkbox">
+                    android:text="@string/r_btn_fire_department">
 
                 </com.google.android.material.radiobutton.MaterialRadioButton>
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/r_btn_two"
+                    android:id="@+id/r_btn_ambulance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/third_checkbox">
+                    android:text="@string/r_btn_ambulance">
 
                 </com.google.android.material.radiobutton.MaterialRadioButton>
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/r_btn_three"
+                    android:id="@+id/r_btn_police"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/fourth_checkbox">
+                    android:text="@string/r_btn_police">
 
                 </com.google.android.material.radiobutton.MaterialRadioButton>
 

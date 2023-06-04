@@ -8,6 +8,6 @@ data class ChangeStatusMessageEntity(
 
 fun ChangeStatusMessageEntity.mapChangeStatusMessageEntity(): ChangeStatusMessageDataModel {
     return ChangeStatusMessageDataModel(
-        message = message
+        message = this.message
     )
 }

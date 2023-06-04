@@ -76,6 +76,10 @@ class NewslineFragment : Fragment(R.layout.fragment_newsline) {
 
     private fun initViews(tokenAuth: String) {
         binding?.apply {
+            btnAddNews.setOnClickListener{
+                findNavController().navigate(R.id.action_newslineFragment_to_addNewsFragment)
+            }
+
             viewModel.requestGetNewsline("Bearer $tokenAuth")
         }
     }

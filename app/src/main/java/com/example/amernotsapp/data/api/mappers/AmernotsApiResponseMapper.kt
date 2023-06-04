@@ -43,7 +43,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                             address = news.address,
                             timeRelease = news.timeRelease,
                             urgencyCode = news.urgencyCode,
-                            photo = news.photo,
                             roleNews = news.roleNews,
                             authorId = news.authorId,
                             employeeId = news.employeeId
@@ -56,7 +55,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                             address = "",
                             timeRelease = "",
                             urgencyCode = 0,
-                            photo = "",
                             roleNews = "",
                             authorId = 0L,
                             employeeId = 0L
@@ -77,7 +75,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                     address = "",
                     timeRelease = "",
                     urgencyCode = 0,
-                    photo = "",
                     roleNews = "",
                     authorId = 0L,
                     employeeId = 0L
@@ -99,7 +96,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                             address = news.address,
                             timeRelease = news.timeRelease,
                             urgencyCode = news.urgencyCode,
-                            photo = news.photo,
                             roleNews = news.roleNews,
                             authorId = news.authorId,
                             employeeId = news.employeeId
@@ -112,7 +108,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                             address = "",
                             timeRelease = "",
                             urgencyCode = 0,
-                            photo = "",
                             roleNews = "",
                             authorId = 0L,
                             employeeId = 0L
@@ -131,7 +126,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                     address = "",
                     timeRelease = "",
                     urgencyCode = 0,
-                    photo = "",
                     roleNews = "",
                     authorId = 0L,
                     employeeId = 0L
@@ -150,7 +144,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
                     address = address ?: "",
                     timeRelease = timeRelease ?: "",
                     urgencyCode = urgencyCode ?: 0,
-                    photo = photo ?: "",
                     roleNews = roleNews ?: "",
                     employeeId = employeeId ?: 0L,
                 )
@@ -162,7 +155,6 @@ class AmernotsApiResponseMapper @Inject constructor() {
             address = "",
             timeRelease = "",
             urgencyCode = 0,
-            photo = "",
             roleNews = "",
             employeeId = 0L
         )

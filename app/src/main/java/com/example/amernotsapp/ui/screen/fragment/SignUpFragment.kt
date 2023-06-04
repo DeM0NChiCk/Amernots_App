@@ -52,14 +52,14 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private fun initViews() {
         binding?.apply {
-            checkboxOne.setOnClickListener {
-                if (checkboxOne.isChecked) {
-                    radioGroup.visibility = View.VISIBLE
+            checkboxUserSurvey.setOnClickListener {
+                if (checkboxUserSurvey.isChecked) {
+                    radioGroupSignUp.visibility = View.VISIBLE
                 } else {
-                    radioGroup.visibility = View.GONE
-                    rBtnOne.isChecked = false
-                    rBtnTwo.isChecked = false
-                    rBtnThree.isChecked = false
+                    radioGroupSignUp.visibility = View.GONE
+                    rBtnFireDepartment.isChecked = false
+                    rBtnAmbulance.isChecked = false
+                    rBtnPolice.isChecked = false
                 }
             }
 
@@ -136,12 +136,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private fun checkUserStatus(): String {
         var userStatus = ROLE_USER
         binding?.apply {
-            if (checkboxOne.isChecked) {
-                if (rBtnOne.isChecked) {
+            if (checkboxUserSurvey.isChecked) {
+                if (rBtnFireDepartment.isChecked) {
                     userStatus = ROLE_FIRE_DEPARTMENT
-                } else if (rBtnTwo.isChecked) {
+                } else if (rBtnAmbulance.isChecked) {
                     userStatus = ROLE_AMBULANCE
-                } else if (rBtnThree.isChecked) {
+                } else if (rBtnPolice.isChecked) {
                     userStatus = ROLE_POLICE
                 }
             } else {

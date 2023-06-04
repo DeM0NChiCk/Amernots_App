@@ -1,5 +1,6 @@
 package com.example.amernotsapp.data.api.network
 
+import com.example.amernotsapp.data.api.model.request.AddNewsRequest
 import com.example.amernotsapp.data.api.model.request.ChangePasswordRequest
 import com.example.amernotsapp.data.api.model.request.SignInRequest
 import com.example.amernotsapp.data.api.model.request.SignUpRequest
@@ -53,5 +54,11 @@ interface AmernotsApiService {
     suspend fun ChangeNewsStatus(
         @Header("Authorization") tokenAuthHeader: String,
         @Query("news_id") news_id: String
+    ): ChangeStatusMessage
+
+    @POST("add/news")
+    suspend fun AddNews(
+        @Header("Authorization") tokenAuthHeader: String,
+        @Body addNewsRequest: AddNewsRequest
     ): ChangeStatusMessage
 }

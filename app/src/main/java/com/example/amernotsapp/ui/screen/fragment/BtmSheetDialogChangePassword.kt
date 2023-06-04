@@ -146,7 +146,7 @@ class BtmSheetDialogChangePassword :
                         STATUS_SUCCESSFULLY -> {
                             Toast.makeText(
                                 context,
-                                R.string.status_successfully,
+                                R.string.status_successfully_pass,
                                 Toast.LENGTH_SHORT
                             ).show()
                             changeCredentialsPreferences()

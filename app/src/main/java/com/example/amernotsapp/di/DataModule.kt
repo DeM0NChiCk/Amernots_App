@@ -2,6 +2,7 @@ package com.example.amernotsapp.di
 
 import com.example.amernotsapp.BuildConfig
 import com.example.amernotsapp.data.api.network.AmernotsApiService
+import com.example.amernotsapp.data.api.network.DaDataService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -38,5 +39,17 @@ class DataModule {
             .build()
 
         return retrofitBuilder.create(AmernotsApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDaData(okHttpClient: OkHttpClient): DaDataService {
+        val retrofitBuilder = Retrofit.Builder()
+            .baseUrl(BuildConfig.DA_DATA_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retrofitBuilder.create(DaDataService::class.java)
     }
 }
