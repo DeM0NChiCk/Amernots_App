@@ -90,7 +90,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     } else {
                         Toast.makeText(
                             context,
-                            "Passwords do not match",
+                            R.string.passwords_do_not_match,
                             Toast.LENGTH_SHORT
                         )
                             .show()
