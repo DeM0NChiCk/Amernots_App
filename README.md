@@ -9,7 +9,7 @@ REST (Retrofit, OkHttp, Gson) - https://github.com/DeM0NChiCk/Amernots_App/tree/
 Clean Architecture - https://github.com/DeM0NChiCk/Amernots_App/tree/master/app/src/main/java/com/example/amernotsapp \
 androidx.preference - https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/res/xml/settings.xml, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/ui/screen/fragment/SettingsFragment.kt 
 
-Для запуска потребуется такие api, как Amernots Api (https://github.com/DeM0NChiCk/AmernotsApi) и DaData (https://dadata.ru/api/).
+Для запуска потребуется такие api, как Amernots Api (https://github.com/DeM0NChiCk/AmernotsApi) и DaData (https://dadata.ru/api/suggest/address/#request).
 Так как Amerntos Api работает только в localhost, то нужно менять IP адрес в build.gradle. \
 Из особеностей поведения:
 - только пользователь без профессии может создавать новости;
