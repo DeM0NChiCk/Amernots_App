@@ -4,6 +4,7 @@
 
 Презентация проекта - https://disk.yandex.ru/i/sCL_sGT16BEa4Q
 
+##Стек технологий:
 mvvm, Kotlin Coroutines - https://github.com/DeM0NChiCk/Amernots_App/tree/master/app/src/main/java/com/example/amernotsapp/ui/vm \
 Dagger 2 - https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/di/AppComponent.kt, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/AmernotsAppAplication.kt, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/di/AppBindsModule.kt, https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/di/DiExtensions.kt \
 SharedPreferences - https://github.com/DeM0NChiCk/Amernots_App/blob/master/app/src/main/java/com/example/amernotsapp/ui/preferences/CredentialsPreferences.kt \
