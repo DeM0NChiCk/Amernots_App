@@ -1,6 +1,6 @@
 # Emernots или же AmernotsApp
 Приложение Emernots как часть обучающего проекта. \
-Полное название Emergency notification system. 
+Полное название Emergency notification system - мобильное приложение для быстрого оповещения о различных экстренны ситуациях.. 
 
 Презентация проекта - https://disk.yandex.ru/i/sCL_sGT16BEa4Q
 
